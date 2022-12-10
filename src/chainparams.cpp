@@ -127,7 +127,7 @@ public:
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x88)(0xAD)(0xE4).convert_to_container<std::vector<unsigned char> >();
 
         vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_main, pnSeed6_main + ARRAYLEN(pnSeed6_main));
-        vSeeds.push_back(CDNSSeedData("potrerotools.com", "seed.potrerotools.com"));
+        vSeeds.push_back(CDNSSeedData("potrerocoin.org", "seed.potrerocoin.org"));
 
         fMiningRequiresPeers = true;
         fDefaultConsistencyChecks = false;
