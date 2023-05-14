@@ -1,16 +1,16 @@
-### Hi there 👋
+### Potrero Core
 
-<!--
-**PotreroCoin/PotreroCoin** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+https://potrerocore.org
 
-Here are some ideas to get you started:
+## What is PotreroCoin (or simply, Potrero)?
+Potrero is an experimental digital currency that enables instant payments to anyone, anywhere in the world. Potrero uses peer-to-peer technology to operate with no central authority: managing transactions and issuing money are carried out collectively by the network. PotreroCore is the name of open source software which enables the use of this currency.
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+For more information, as well as an immediately useable, binary version of the Potrero Core, check https://potrerocoin.org.
+
+## License
+Potrero Core is released under the terms of the MIT license. See COPYING for more information or see https://opensource.org/licenses/MIT.
+
+## Development Process
+The master branch is regularly built and tested, but it is not guaranteed to be completely stable. Tags are created regularly from release branches to indicate new official, stable release versions of Potrero Core.
+
+Developer IRC can be found on Freenode at #potrerocoin-dev.
