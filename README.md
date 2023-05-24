@@ -1,6 +1,6 @@
 ### Potrero Core
 
-https://potrerocore.org
+https://potrerocoin.org
 
 ## What is PotreroCoin (or simply, Potrero)?
 Potrero is an experimental digital currency that enables instant payments to anyone, anywhere in the world. Potrero uses peer-to-peer technology to operate with no central authority: managing transactions and issuing money are carried out collectively by the network. PotreroCore is the name of open source software which enables the use of this currency.
@@ -17,4 +17,4 @@ The master branch is regularly built and tested, but it is not guaranteed to be 
 
 IRC channels can be found on Freenode.\
 General topics: #potrero\
-Development: #potrero-dev
+Development topics: #potrero-dev
