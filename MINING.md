@@ -2,6 +2,8 @@
 
 At this time, Potreros can be efficiently mined with GPU or even CPU mining machines.
 
+Note: as of 5/28/23 CPU mining is probably out of question.
+
 ## How to mine Potreros?
 
 1. Obtain suitable hardware and software.
