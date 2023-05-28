@@ -21,7 +21,7 @@ https://github.com/PotreroCoin/PotreroCoin/issues/new
 
 ## Mining Pools
 
-| Pool                 | Description | Rewards | Fee |
-| :------------------- | :---------- | :------ | :-- |
-| http://pool.potrerocoin.com |             | PPLNS 1 minute   | 1% |
-|https://mine.altcoinbuilders.com |         | PPLNS 10 minutes | 5% |
+| Pool                             | Added     | Reward | Payout | Fee |
+| :------------------------------- | :-------- | :----- | :----- | :-- |
+| http://pool.potrerocoin.com      | 5/26/2023 | PPLNS  | 1 min  | 1%  |
+| https://mine.altcoinbuilders.com | 5/28/2023 | PPLNS  | 5 min  | 5%  |
