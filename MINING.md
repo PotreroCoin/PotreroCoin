@@ -21,6 +21,7 @@ https://github.com/PotreroCoin/PotreroCoin/issues/new
 
 ## Mining Pools
 
-| Pool                 | Description | Rewards | Fee | Verified |
-| :------------------- | :---------- | :------ | :-- | :------- |
-| pool.potrerocoin.com |             | PPS     | 1%  | yes      |
+| Pool                 | Description | Rewards | Fee |
+| :------------------- | :---------- | :------ | :-- |
+| http://pool.potrerocoin.com |             | PPLNS 1 minute   | 1% |
+|https://mine.altcoinbuilders.com |         | PPLNS 10 minutes | 5% |
