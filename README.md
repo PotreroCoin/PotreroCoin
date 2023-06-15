@@ -25,8 +25,11 @@ The master branch is regularly built and tested, but it is not guaranteed to be 
 
 ## Community
 
-Join us on Discord https://discord.gg/Fqpwpyvb
+Join us:  
+Discord: https://discord.gg/Fqpwpyvb  
+Slack: https://app.slack.com/huddle/T05CKMV212S/C05CUQFRFHS  
+IRC channels on Freenode: #potrero #potrero-dev  
 
-IRC channels can be found on Freenode.\
-General topics: #potrero\
-Development topics: #potrero-dev
+Follow us:  
+Twitter: https://twitter.com/PotreroCoin  
+Facebook: https://www.facebook.com/potrerocoin  
