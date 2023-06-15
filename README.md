@@ -19,6 +19,8 @@ The master branch is regularly built and tested, but it is not guaranteed to be 
 
 ## Community
 
+Join us on Discord https://discord.com/invite/smchxHDr
+
 IRC channels can be found on Freenode.\
 General topics: #potrero\
 Development topics: #potrero-dev
