@@ -26,7 +26,7 @@ The master branch is regularly built and tested, but it is not guaranteed to be 
 ## Community
 
 Join us:  
-Discord: https://discord.gg/Fqpwpyvb  
+Discord: https://discord.gg/9zqQHtRH9q  
 Slack: https://app.slack.com/huddle/T05CKMV212S/C05CUQFRFHS  
 IRC channels on Freenode: #potrero #potrero-dev  
 
