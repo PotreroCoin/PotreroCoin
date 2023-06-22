@@ -26,4 +26,3 @@ https://github.com/PotreroCoin/PotreroCoin/issues/new
 | Pool                             | Stratum                          | Reward | Payout | Fee  | Added     |
 | :------------------------------- | :------------------------------- | :----- | :----- | :--- | :-------- |
 | http://pool.potrerocoin.com      | pool.potrerocoin:3000            | PPLNS  | 1 min  | 1%   | 5/26/2023 |
-| https://mine.altcoinbuilders.com | connect.altcoinbuilders.com:6803 | PPLNS  | 5 min  | 5%   | 5/28/2023 |
