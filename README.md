@@ -32,4 +32,4 @@ Twitter: https://twitter.com/PotreroCoin
 Facebook: https://www.facebook.com/potrerocoin  
 
 ## Donations
-POTR: Pikq5UnBs94ztJCeYSrACEyv62ywoqCFio
+℗ Pikq5UnBs94ztJCeYSrACEyv62ywoqCFio
