@@ -24,8 +24,6 @@ or reach out via Discord https://discord.gg/9zqQHtRH9q
 
 ## Mining Pools
 
-A number of mining pools have been confirmed to work reliably.
-
 | Pool                             | Stratum                          | Payout | Fee  | Added     |
 | :------------------------------- | :------------------------------- | :----- | :--- | :-------- |
 | http://pool.potrerocoin.com      | pool.potrerocoin:3000            | 1 min  | 1%   | 5/26/2023 |
