@@ -29,5 +29,3 @@ A number of mining pools have been confirmed to work reliably.
 | Pool                             | Stratum                          | Payout | Fee  | Added     |
 | :------------------------------- | :------------------------------- | :----- | :--- | :-------- |
 | http://pool.potrerocoin.com      | pool.potrerocoin:3000            | 1 min  | 1%   | 5/26/2023 |
-| https://wsdpool.online           | serveo.net:7077                  | 6 h    | 1%   | 6/22/2023 |
-| https://cminer.org               | cminer.org:4073                  | 1 h    | 0.5% | 6/22/2023 |
