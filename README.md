@@ -2,13 +2,13 @@
 https://potrerocoin.org
 
 ## What is PotreroCoin?
-Potrero is an experimental digital currency that enables instant payments to anyone, anywhere in the world. Potrero uses peer-to-peer technology to operate with no central authority: managing transactions and issuing money are carried out collectively by the network. PotreroCore is the name of open source software which enables the use of this currency.
+Potrero is an experimental digital currency that enables instant payments to anyone, anywhere in the world. Potrero uses peer-to-peer technology to operate with no central authority: managing transactions and issuing money are carried out collectively by the network. PotreroCore is the name of open-source software that enables the use of this currency.
 
-* 2.5 minute block targets
-* subsidy halves in 840k blocks or about 4 years
 * 50 coins per block
+* 2.5 minute block targets
 * 2016 blocks to retarget difficulty
 * 100 million total coins
+* subsidy halves in 840k blocks
   
 For more information, as well as an immediately useable, binary version of the Potrero Core, check: https://potrerocoin.org
 
