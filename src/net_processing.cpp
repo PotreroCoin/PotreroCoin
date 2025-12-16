@@ -30,6 +30,7 @@
 #include "utilstrencodings.h"
 #include "validationinterface.h"
 
+#include <array>
 #include <boost/thread.hpp>
 
 #if defined(NDEBUG)

@@ -24,6 +24,26 @@ make
 make install # optional
 ```
 
+Linux-Specific Notes
+---------------------
+
+On Linux systems without a packaged Berkeley DB 4.8, run the bundled helper after `./autogen.sh`
+and before `./configure`:
+
+```bash
+./autogen.sh
+./build/install_db4.sh
+./configure
+make
+make install
+```
+
+`./build/install_db4.sh` downloads, patches, and installs BDB 4.8 into `db4/`. Pointing `./configure` at
+those directories makes the wallet use this compatible build rather than any newer system version; the helper
+is intentionally outside `autogen.sh`/`./configure` so you can decide when to trigger the download. `./configure`
+automatically detects the local `db4/` tree after the helper succeeds, so no extra `BDB_CFLAGS`/`BDB_LIBS`
+flags are required; rerun the helper only if you delete `db4/` or intentionally rebuild the dependency.
+
 This will build potrero-qt as well if the dependencies are met.
 
 Dependencies

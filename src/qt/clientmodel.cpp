@@ -4,6 +4,12 @@
 
 #include "clientmodel.h"
 
+#include <boost/bind.hpp>
+#include <boost/bind/placeholders.hpp>
+
+using boost::placeholders::_1;
+using boost::placeholders::_2;
+
 #include "bantablemodel.h"
 #include "guiconstants.h"
 #include "guiutil.h"

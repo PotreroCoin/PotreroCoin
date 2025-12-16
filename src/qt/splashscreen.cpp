@@ -8,6 +8,12 @@
 
 #include "splashscreen.h"
 
+#include <boost/bind.hpp>
+#include <boost/bind/placeholders.hpp>
+
+using boost::placeholders::_1;
+using boost::placeholders::_2;
+
 #include "networkstyle.h"
 
 #include "clientversion.h"

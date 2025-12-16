@@ -4,6 +4,13 @@
 
 #include "transactiontablemodel.h"
 
+#include <boost/bind.hpp>
+#include <boost/bind/placeholders.hpp>
+
+using boost::placeholders::_1;
+using boost::placeholders::_2;
+using boost::placeholders::_3;
+
 #include "addresstablemodel.h"
 #include "guiconstants.h"
 #include "guiutil.h"

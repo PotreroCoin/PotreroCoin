@@ -4,6 +4,16 @@
 
 #include "walletmodel.h"
 
+#include <boost/bind.hpp>
+#include <boost/bind/placeholders.hpp>
+
+using boost::placeholders::_1;
+using boost::placeholders::_2;
+using boost::placeholders::_3;
+using boost::placeholders::_4;
+using boost::placeholders::_5;
+using boost::placeholders::_6;
+
 #include "addresstablemodel.h"
 #include "consensus/validation.h"
 #include "guiconstants.h"

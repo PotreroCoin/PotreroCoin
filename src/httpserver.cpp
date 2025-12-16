@@ -15,12 +15,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <deque>
 
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <signal.h>
 #include <future>
-
 #include <event2/event.h>
 #include <event2/http.h>
 #include <event2/thread.h>
@@ -669,4 +669,3 @@ void UnregisterHTTPHandler(const std::string &prefix, bool exactMatch)
         pathHandlers.erase(i);
     }
 }
-

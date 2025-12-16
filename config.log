@@ -27,8 +27,8 @@ uname -v = #91-Ubuntu SMP PREEMPT_DYNAMIC Tue Nov 18 14:14:30 UTC 2025
 /usr/bin/oslevel       = unknown
 /bin/universe          = unknown
 
-PATH: /home/cris/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/
-PATH: /home/cris/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/
+PATH: /home/cris/.local/bin/
+PATH: /tmp/.tmp4NN4iy/
 PATH: /home/cris/.local/bin/
 PATH: /home/cris/.local/bin/
 PATH: /usr/local/sbin/
@@ -40,6 +40,7 @@ PATH: /bin/
 PATH: /usr/games/
 PATH: /usr/local/games/
 PATH: /snap/bin/
+PATH: /home/cris/.vscode/extensions/openai.chatgpt-0.4.51-linux-x64/bin/linux-x86_64/
 
 
 ## ----------- ##
@@ -1417,57 +1418,57 @@ configure:24672: checking for visibility attribute
 configure:24681: g++ -std=c++11 -o conftest -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS  conftest.cpp  >&5
 configure:24681: $? = 0
 configure:24687: result: yes
-configure:24957: checking for miniupnpc/miniwget.h
-configure:24957: g++ -std=c++11 -c -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS conftest.cpp >&5
-configure:24957: $? = 0
-configure:24957: result: yes
-configure:24963: checking for main in -lminiupnpc
-configure:24985: g++ -std=c++11 -o conftest -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS  conftest.cpp -lminiupnpc   >&5
-configure:24985: $? = 0
-configure:24995: result: yes
-configure:24957: checking for miniupnpc/miniupnpc.h
-configure:24957: g++ -std=c++11 -c -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS conftest.cpp >&5
-configure:24957: $? = 0
-configure:24957: result: yes
-configure:24963: checking for main in -lminiupnpc
-configure:24995: result: yes
-configure:24957: checking for miniupnpc/upnpcommands.h
-configure:24957: g++ -std=c++11 -c -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS conftest.cpp >&5
-configure:24957: $? = 0
-configure:24957: result: yes
-configure:24963: checking for main in -lminiupnpc
-configure:24995: result: yes
-configure:24957: checking for miniupnpc/upnperrors.h
-configure:24957: g++ -std=c++11 -c -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS conftest.cpp >&5
-configure:24957: $? = 0
-configure:24957: result: yes
-configure:24963: checking for main in -lminiupnpc
-configure:24995: result: yes
-configure:25112: checking for Qt5Core Qt5Gui Qt5Network Qt5Widgets
-configure:25119: $PKG_CONFIG --exists --print-errors "$qt5_modules"
-configure:25122: $? = 0
-configure:25136: $PKG_CONFIG --exists --print-errors "$qt5_modules"
-configure:25139: $? = 0
-configure:25177: result: yes
-configure:25429: checking for Qt5Test
-configure:25436: $PKG_CONFIG --exists --print-errors "${QT_LIB_PREFIX}Test"
-configure:25439: $? = 0
-configure:25453: $PKG_CONFIG --exists --print-errors "${QT_LIB_PREFIX}Test"
-configure:25456: $? = 0
-configure:25494: result: yes
-configure:25501: checking for Qt5DBus
-configure:25508: $PKG_CONFIG --exists --print-errors "${QT_LIB_PREFIX}DBus"
-configure:25511: $? = 0
-configure:25525: $PKG_CONFIG --exists --print-errors "${QT_LIB_PREFIX}DBus"
-configure:25528: $? = 0
-configure:25566: result: yes
-configure:26578: checking for static Qt
-configure:26602: g++ -std=c++11 -c -fPIC -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtGui -DQT_NETWORK_LIB -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -DQT_WIDGETS_LIB -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -DQT_GUI_LIB -DQT_CORE_LIB   -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS conftest.cpp >&5
+configure:24961: checking for miniupnpc/miniwget.h
+configure:24961: g++ -std=c++11 -c -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS conftest.cpp >&5
+configure:24961: $? = 0
+configure:24961: result: yes
+configure:24967: checking for main in -lminiupnpc
+configure:24989: g++ -std=c++11 -o conftest -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS  conftest.cpp -lminiupnpc   >&5
+configure:24989: $? = 0
+configure:24999: result: yes
+configure:24961: checking for miniupnpc/miniupnpc.h
+configure:24961: g++ -std=c++11 -c -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS conftest.cpp >&5
+configure:24961: $? = 0
+configure:24961: result: yes
+configure:24967: checking for main in -lminiupnpc
+configure:24999: result: yes
+configure:24961: checking for miniupnpc/upnpcommands.h
+configure:24961: g++ -std=c++11 -c -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS conftest.cpp >&5
+configure:24961: $? = 0
+configure:24961: result: yes
+configure:24967: checking for main in -lminiupnpc
+configure:24999: result: yes
+configure:24961: checking for miniupnpc/upnperrors.h
+configure:24961: g++ -std=c++11 -c -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS conftest.cpp >&5
+configure:24961: $? = 0
+configure:24961: result: yes
+configure:24967: checking for main in -lminiupnpc
+configure:24999: result: yes
+configure:25116: checking for Qt5Core Qt5Gui Qt5Network Qt5Widgets
+configure:25123: $PKG_CONFIG --exists --print-errors "$qt5_modules"
+configure:25126: $? = 0
+configure:25140: $PKG_CONFIG --exists --print-errors "$qt5_modules"
+configure:25143: $? = 0
+configure:25181: result: yes
+configure:25433: checking for Qt5Test
+configure:25440: $PKG_CONFIG --exists --print-errors "${QT_LIB_PREFIX}Test"
+configure:25443: $? = 0
+configure:25457: $PKG_CONFIG --exists --print-errors "${QT_LIB_PREFIX}Test"
+configure:25460: $? = 0
+configure:25498: result: yes
+configure:25505: checking for Qt5DBus
+configure:25512: $PKG_CONFIG --exists --print-errors "${QT_LIB_PREFIX}DBus"
+configure:25515: $? = 0
+configure:25529: $PKG_CONFIG --exists --print-errors "${QT_LIB_PREFIX}DBus"
+configure:25532: $? = 0
+configure:25570: result: yes
+configure:26582: checking for static Qt
+configure:26606: g++ -std=c++11 -c -fPIC -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtGui -DQT_NETWORK_LIB -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -DQT_WIDGETS_LIB -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -DQT_GUI_LIB -DQT_CORE_LIB   -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS conftest.cpp >&5
 conftest.cpp: In function 'int main()':
 conftest.cpp:70:7: error: 'choke' was not declared in this scope
    70 |       choke me
       |       ^~~~~
-configure:26602: $? = 1
+configure:26606: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "Potrero Core"
@@ -1544,14 +1545,14 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:26611: result: no
-configure:27444: checking whether -fPIE can be used with this Qt config
-configure:27465: g++ -std=c++11 -c -fPIE -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtGui -DQT_NETWORK_LIB -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -DQT_WIDGETS_LIB -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -DQT_GUI_LIB -DQT_CORE_LIB   -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS conftest.cpp >&5
+configure:26615: result: no
+configure:27448: checking whether -fPIE can be used with this Qt config
+configure:27469: g++ -std=c++11 -c -fPIE -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtGui -DQT_NETWORK_LIB -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -DQT_WIDGETS_LIB -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -DQT_GUI_LIB -DQT_CORE_LIB   -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS conftest.cpp >&5
 conftest.cpp: In function 'int main()':
 conftest.cpp:68:15: error: 'choke' was not declared in this scope
    68 |               choke;
       |               ^~~~~
-configure:27465: $? = 1
+configure:27469: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "Potrero Core"
@@ -1626,107 +1627,107 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:27470: result: no
-configure:27536: checking for moc-qt5
-configure:27574: result: no
-configure:27536: checking for moc5
-configure:27574: result: no
-configure:27536: checking for moc
-configure:27559: found /usr/lib/x86_64-linux-gnu/qt5/bin/moc
-configure:27571: result: /usr/lib/x86_64-linux-gnu/qt5/bin/moc
-configure:27665: checking for uic-qt5
-configure:27703: result: no
-configure:27665: checking for uic5
-configure:27703: result: no
-configure:27665: checking for uic
-configure:27688: found /usr/lib/x86_64-linux-gnu/qt5/bin/uic
-configure:27700: result: /usr/lib/x86_64-linux-gnu/qt5/bin/uic
-configure:27794: checking for rcc-qt5
-configure:27832: result: no
-configure:27794: checking for rcc5
-configure:27832: result: no
-configure:27794: checking for rcc
-configure:27817: found /usr/lib/x86_64-linux-gnu/qt5/bin/rcc
-configure:27829: result: /usr/lib/x86_64-linux-gnu/qt5/bin/rcc
-configure:27923: checking for lrelease-qt5
-configure:27961: result: no
-configure:27923: checking for lrelease5
-configure:27961: result: no
-configure:27923: checking for lrelease
-configure:27946: found /usr/lib/x86_64-linux-gnu/qt5/bin/lrelease
-configure:27958: result: /usr/lib/x86_64-linux-gnu/qt5/bin/lrelease
-configure:28052: checking for lupdate-qt5
-configure:28090: result: no
-configure:28052: checking for lupdate5
-configure:28090: result: no
-configure:28052: checking for lupdate
-configure:28075: found /usr/lib/x86_64-linux-gnu/qt5/bin/lupdate
-configure:28087: result: /usr/lib/x86_64-linux-gnu/qt5/bin/lupdate
-configure:28283: checking whether to build Potrero Core GUI
-configure:28313: result: yes (Qt5)
-configure:28389: checking for boostlib >= 1.47.0
-configure:28474: g++ -std=c++11 -c -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -I/usr/include conftest.cpp >&5
-configure:28474: $? = 0
-configure:28477: result: yes
-configure:28666: checking whether the Boost::System library is available
-configure:28692: g++ -std=c++11 -c   -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -I/usr/include conftest.cpp >&5
-configure:28692: $? = 0
-configure:28708: result: yes
-configure:28724: checking for exit in -lboost_system
-configure:28746: g++ -std=c++11 -o conftest -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -I/usr/include  -L/usr/lib/x86_64-linux-gnu conftest.cpp -lboost_system   >&5
-configure:28746: $? = 0
-configure:28757: result: yes
-configure:28912: checking whether the Boost::Filesystem library is available
-configure:28937: g++ -std=c++11 -c -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -I/usr/include conftest.cpp >&5
-configure:28937: $? = 0
-configure:28952: result: yes
-configure:28964: checking for exit in -lboost_filesystem
-configure:28986: g++ -std=c++11 -o conftest -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -I/usr/include  -L/usr/lib/x86_64-linux-gnu conftest.cpp -lboost_filesystem   -lboost_system >&5
-configure:28986: $? = 0
-configure:28997: result: yes
-configure:29147: checking whether the Boost::Program_Options library is available
-configure:29172: g++ -std=c++11 -c -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -I/usr/include conftest.cpp >&5
-configure:29172: $? = 0
-configure:29187: result: yes
-configure:29198: checking for exit in -lboost_program_options
-configure:29220: g++ -std=c++11 -o conftest -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -I/usr/include  -L/usr/lib/x86_64-linux-gnu conftest.cpp -lboost_program_options   >&5
-configure:29220: $? = 0
-configure:29231: result: yes
-configure:29380: checking whether the Boost::Thread library is available
-configure:29413: g++ -std=c++11 -c -pthread -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -I/usr/include conftest.cpp >&5
-configure:29413: $? = 0
-configure:29429: result: yes
-configure:29459: checking for exit in -lboost_thread
-configure:29481: g++ -std=c++11 -o conftest -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -I/usr/include  -L/usr/lib/x86_64-linux-gnu conftest.cpp -lboost_thread   >&5
-configure:29481: $? = 0
-configure:29492: result: yes
-configure:29652: checking whether the Boost::Chrono library is available
-configure:29677: g++ -std=c++11 -c -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -pthread -I/usr/include conftest.cpp >&5
-configure:29677: $? = 0
-configure:29693: result: yes
-configure:29709: checking for exit in -lboost_chrono
-configure:29731: g++ -std=c++11 -o conftest -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -pthread -I/usr/include  -L/usr/lib/x86_64-linux-gnu conftest.cpp -lboost_chrono   >&5
-configure:29731: $? = 0
-configure:29742: result: yes
-configure:29987: checking whether the Boost::Unit_Test_Framework library is available
-configure:30011: g++ -std=c++11 -c -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -pthread -I/usr/include conftest.cpp >&5
+configure:27474: result: no
+configure:27540: checking for moc-qt5
+configure:27578: result: no
+configure:27540: checking for moc5
+configure:27578: result: no
+configure:27540: checking for moc
+configure:27563: found /usr/lib/x86_64-linux-gnu/qt5/bin/moc
+configure:27575: result: /usr/lib/x86_64-linux-gnu/qt5/bin/moc
+configure:27669: checking for uic-qt5
+configure:27707: result: no
+configure:27669: checking for uic5
+configure:27707: result: no
+configure:27669: checking for uic
+configure:27692: found /usr/lib/x86_64-linux-gnu/qt5/bin/uic
+configure:27704: result: /usr/lib/x86_64-linux-gnu/qt5/bin/uic
+configure:27798: checking for rcc-qt5
+configure:27836: result: no
+configure:27798: checking for rcc5
+configure:27836: result: no
+configure:27798: checking for rcc
+configure:27821: found /usr/lib/x86_64-linux-gnu/qt5/bin/rcc
+configure:27833: result: /usr/lib/x86_64-linux-gnu/qt5/bin/rcc
+configure:27927: checking for lrelease-qt5
+configure:27965: result: no
+configure:27927: checking for lrelease5
+configure:27965: result: no
+configure:27927: checking for lrelease
+configure:27950: found /usr/lib/x86_64-linux-gnu/qt5/bin/lrelease
+configure:27962: result: /usr/lib/x86_64-linux-gnu/qt5/bin/lrelease
+configure:28056: checking for lupdate-qt5
+configure:28094: result: no
+configure:28056: checking for lupdate5
+configure:28094: result: no
+configure:28056: checking for lupdate
+configure:28079: found /usr/lib/x86_64-linux-gnu/qt5/bin/lupdate
+configure:28091: result: /usr/lib/x86_64-linux-gnu/qt5/bin/lupdate
+configure:28287: checking whether to build Potrero Core GUI
+configure:28317: result: yes (Qt5)
+configure:28393: checking for boostlib >= 1.47.0
+configure:28478: g++ -std=c++11 -c -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -I/usr/include conftest.cpp >&5
+configure:28478: $? = 0
+configure:28481: result: yes
+configure:28670: checking whether the Boost::System library is available
+configure:28696: g++ -std=c++11 -c   -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -I/usr/include conftest.cpp >&5
+configure:28696: $? = 0
+configure:28712: result: yes
+configure:28728: checking for exit in -lboost_system
+configure:28750: g++ -std=c++11 -o conftest -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -I/usr/include  -L/usr/lib/x86_64-linux-gnu conftest.cpp -lboost_system   >&5
+configure:28750: $? = 0
+configure:28761: result: yes
+configure:28916: checking whether the Boost::Filesystem library is available
+configure:28941: g++ -std=c++11 -c -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -I/usr/include conftest.cpp >&5
+configure:28941: $? = 0
+configure:28956: result: yes
+configure:28968: checking for exit in -lboost_filesystem
+configure:28990: g++ -std=c++11 -o conftest -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -I/usr/include  -L/usr/lib/x86_64-linux-gnu conftest.cpp -lboost_filesystem   -lboost_system >&5
+configure:28990: $? = 0
+configure:29001: result: yes
+configure:29151: checking whether the Boost::Program_Options library is available
+configure:29176: g++ -std=c++11 -c -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -I/usr/include conftest.cpp >&5
+configure:29176: $? = 0
+configure:29191: result: yes
+configure:29202: checking for exit in -lboost_program_options
+configure:29224: g++ -std=c++11 -o conftest -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -I/usr/include  -L/usr/lib/x86_64-linux-gnu conftest.cpp -lboost_program_options   >&5
+configure:29224: $? = 0
+configure:29235: result: yes
+configure:29384: checking whether the Boost::Thread library is available
+configure:29417: g++ -std=c++11 -c -pthread -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -I/usr/include conftest.cpp >&5
+configure:29417: $? = 0
+configure:29433: result: yes
+configure:29463: checking for exit in -lboost_thread
+configure:29485: g++ -std=c++11 -o conftest -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -I/usr/include  -L/usr/lib/x86_64-linux-gnu conftest.cpp -lboost_thread   >&5
+configure:29485: $? = 0
+configure:29496: result: yes
+configure:29656: checking whether the Boost::Chrono library is available
+configure:29681: g++ -std=c++11 -c -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -pthread -I/usr/include conftest.cpp >&5
+configure:29681: $? = 0
+configure:29697: result: yes
+configure:29713: checking for exit in -lboost_chrono
+configure:29735: g++ -std=c++11 -o conftest -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -pthread -I/usr/include  -L/usr/lib/x86_64-linux-gnu conftest.cpp -lboost_chrono   >&5
+configure:29735: $? = 0
+configure:29746: result: yes
+configure:29991: checking whether the Boost::Unit_Test_Framework library is available
+configure:30015: g++ -std=c++11 -c -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -pthread -I/usr/include conftest.cpp >&5
 conftest.cpp: In function 'int main()':
 conftest.cpp:73:70: warning: unused variable 'test' [-Wunused-variable]
    73 |                                                          test_suite* test= BOOST_TEST_SUITE( "Unit test example 1" ); return 0;
       |                                                                      ^~~~
-configure:30011: $? = 0
-configure:30026: result: yes
-configure:30137: checking for dynamic linked boost test
-configure:30152: g++ -std=c++11 -o conftest -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -pthread -I/usr/include  conftest.cpp  -L/usr/lib/x86_64-linux-gnu -lboost_unit_test_framework >&5
-configure:30152: $? = 0
-configure:30154: result: yes
-configure:30180: checking for mismatched boost c++11 scoped enums
-configure:30208: g++ -std=c++11 -o conftest -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -pthread -I/usr/include  conftest.cpp -L/usr/lib/x86_64-linux-gnu -lboost_system -lboost_filesystem -lboost_program_options -lboost_thread -lboost_chrono  >&5
+configure:30015: $? = 0
+configure:30030: result: yes
+configure:30141: checking for dynamic linked boost test
+configure:30156: g++ -std=c++11 -o conftest -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -pthread -I/usr/include  conftest.cpp  -L/usr/lib/x86_64-linux-gnu -lboost_unit_test_framework >&5
+configure:30156: $? = 0
+configure:30158: result: yes
+configure:30184: checking for mismatched boost c++11 scoped enums
+configure:30212: g++ -std=c++11 -o conftest -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -pthread -I/usr/include  conftest.cpp -L/usr/lib/x86_64-linux-gnu -lboost_system -lboost_filesystem -lboost_program_options -lboost_thread -lboost_chrono  >&5
 conftest.cpp: In function 'int main()':
 conftest.cpp:86:5: error: 'choke' was not declared in this scope
    86 |     choke;
       |     ^~~~~
-configure:30208: $? = 1
+configure:30212: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "Potrero Core"
@@ -1819,85 +1820,85 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:30213: result: ok
-configure:30245: g++ -std=c++11 -o conftest -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -pthread -I/usr/include  conftest.cpp -L/usr/lib/x86_64-linux-gnu -lboost_system -lboost_filesystem -lboost_program_options -lboost_thread -lboost_chrono  >&5
-configure:30245: $? = 0
-configure:30309: checking for libssl
-configure:30316: $PKG_CONFIG --exists --print-errors "libssl"
-configure:30319: $? = 0
-configure:30333: $PKG_CONFIG --exists --print-errors "libssl"
-configure:30336: $? = 0
-configure:30374: result: yes
-configure:30380: checking for libcrypto
-configure:30387: $PKG_CONFIG --exists --print-errors "libcrypto"
-configure:30390: $? = 0
-configure:30404: $PKG_CONFIG --exists --print-errors "libcrypto"
-configure:30407: $? = 0
-configure:30445: result: yes
-configure:30454: checking for protobuf
-configure:30461: $PKG_CONFIG --exists --print-errors "protobuf"
-configure:30464: $? = 0
-configure:30478: $PKG_CONFIG --exists --print-errors "protobuf"
-configure:30481: $? = 0
-configure:30541: result: yes
-configure:30556: checking for libqrencode
-configure:30563: $PKG_CONFIG --exists --print-errors "libqrencode"
-configure:30566: $? = 0
-configure:30580: $PKG_CONFIG --exists --print-errors "libqrencode"
-configure:30583: $? = 0
-configure:30621: result: yes
-configure:30634: checking for libevent
-configure:30641: $PKG_CONFIG --exists --print-errors "libevent"
-configure:30644: $? = 0
-configure:30658: $PKG_CONFIG --exists --print-errors "libevent"
-configure:30661: $? = 0
-configure:30699: result: yes
-configure:30706: checking for libevent_pthreads
-configure:30713: $PKG_CONFIG --exists --print-errors "libevent_pthreads"
-configure:30716: $? = 0
-configure:30730: $PKG_CONFIG --exists --print-errors "libevent_pthreads"
-configure:30733: $? = 0
-configure:30771: result: yes
-configure:30781: checking for libzmq >= 4
-configure:30788: $PKG_CONFIG --exists --print-errors "libzmq >= 4"
-configure:30791: $? = 0
-configure:30805: $PKG_CONFIG --exists --print-errors "libzmq >= 4"
-configure:30808: $? = 0
-configure:30856: result: yes
-configure:31274: checking whether EVP_MD_CTX_new is declared
-configure:31274: g++ -std=c++11 -c -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter     -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS conftest.cpp >&5
-configure:31274: $? = 0
-configure:31274: result: yes
-configure:31518: checking for protoc
-configure:31541: found /usr/bin/protoc
-configure:31553: result: /usr/bin/protoc
-configure:31587: checking whether to build potrerod
-configure:31597: result: yes
-configure:31600: checking whether to build utils (potrero-cli potrero-tx)
-configure:31610: result: yes
-configure:31613: checking whether to build libraries
-configure:31630: result: yes
-configure:31641: checking if ccache should be used
-configure:31654: result: no
-configure:31698: checking if wallet should be enabled
-configure:31701: result: yes
-configure:31712: checking whether to build with support for UPnP
-configure:31722: result: yes
-configure:31724: checking whether to build with UPnP enabled by default
-configure:31732: result: no
-configure:31748: checking whether to build GUI with support for D-Bus
-configure:31755: result: yes
-configure:31758: checking whether to build GUI with support for QR codes
-configure:31768: result: yes
-configure:31785: checking whether to build test_potrero-qt
-configure:31788: result: yes
-configure:31806: checking whether to build test_potrero
-configure:31809: result: yes
-configure:31818: checking whether to reduce exports
-configure:31824: result: no
-configure:32143: checking that generated files are newer than configure
-configure:32149: result: done
-configure:32261: creating ./config.status
+configure:30217: result: ok
+configure:30249: g++ -std=c++11 -o conftest -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS -pthread -I/usr/include  conftest.cpp -L/usr/lib/x86_64-linux-gnu -lboost_system -lboost_filesystem -lboost_program_options -lboost_thread -lboost_chrono  >&5
+configure:30249: $? = 0
+configure:30313: checking for libssl
+configure:30320: $PKG_CONFIG --exists --print-errors "libssl"
+configure:30323: $? = 0
+configure:30337: $PKG_CONFIG --exists --print-errors "libssl"
+configure:30340: $? = 0
+configure:30378: result: yes
+configure:30384: checking for libcrypto
+configure:30391: $PKG_CONFIG --exists --print-errors "libcrypto"
+configure:30394: $? = 0
+configure:30408: $PKG_CONFIG --exists --print-errors "libcrypto"
+configure:30411: $? = 0
+configure:30449: result: yes
+configure:30458: checking for protobuf
+configure:30465: $PKG_CONFIG --exists --print-errors "protobuf"
+configure:30468: $? = 0
+configure:30482: $PKG_CONFIG --exists --print-errors "protobuf"
+configure:30485: $? = 0
+configure:30545: result: yes
+configure:30560: checking for libqrencode
+configure:30567: $PKG_CONFIG --exists --print-errors "libqrencode"
+configure:30570: $? = 0
+configure:30584: $PKG_CONFIG --exists --print-errors "libqrencode"
+configure:30587: $? = 0
+configure:30625: result: yes
+configure:30638: checking for libevent
+configure:30645: $PKG_CONFIG --exists --print-errors "libevent"
+configure:30648: $? = 0
+configure:30662: $PKG_CONFIG --exists --print-errors "libevent"
+configure:30665: $? = 0
+configure:30703: result: yes
+configure:30710: checking for libevent_pthreads
+configure:30717: $PKG_CONFIG --exists --print-errors "libevent_pthreads"
+configure:30720: $? = 0
+configure:30734: $PKG_CONFIG --exists --print-errors "libevent_pthreads"
+configure:30737: $? = 0
+configure:30775: result: yes
+configure:30785: checking for libzmq >= 4
+configure:30792: $PKG_CONFIG --exists --print-errors "libzmq >= 4"
+configure:30795: $? = 0
+configure:30809: $PKG_CONFIG --exists --print-errors "libzmq >= 4"
+configure:30812: $? = 0
+configure:30860: result: yes
+configure:31278: checking whether EVP_MD_CTX_new is declared
+configure:31278: g++ -std=c++11 -c -g -O2 -Wall -Wextra -Wformat -Wvla -Wformat-security -Wno-unused-parameter     -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS conftest.cpp >&5
+configure:31278: $? = 0
+configure:31278: result: yes
+configure:31522: checking for protoc
+configure:31545: found /usr/bin/protoc
+configure:31557: result: /usr/bin/protoc
+configure:31591: checking whether to build potrerod
+configure:31601: result: yes
+configure:31604: checking whether to build utils (potrero-cli potrero-tx)
+configure:31614: result: yes
+configure:31617: checking whether to build libraries
+configure:31634: result: yes
+configure:31645: checking if ccache should be used
+configure:31658: result: no
+configure:31702: checking if wallet should be enabled
+configure:31705: result: yes
+configure:31716: checking whether to build with support for UPnP
+configure:31726: result: yes
+configure:31728: checking whether to build with UPnP enabled by default
+configure:31736: result: no
+configure:31752: checking whether to build GUI with support for D-Bus
+configure:31759: result: yes
+configure:31762: checking whether to build GUI with support for QR codes
+configure:31772: result: yes
+configure:31789: checking whether to build test_potrero-qt
+configure:31792: result: yes
+configure:31810: checking whether to build test_potrero
+configure:31813: result: yes
+configure:31822: checking whether to reduce exports
+configure:31828: result: no
+configure:32147: checking that generated files are newer than configure
+configure:32153: result: done
+configure:32265: creating ./config.status
 
 ## ---------------------- ##
 ## Running config.status. ##
@@ -1930,11 +1931,11 @@ config.status:1732: cd src       && sed -e '/# am--include-marker/d' Makefile   
 make: Nothing to be done for 'am--depfiles'.
 config.status:1737: $? = 0
 config.status:1655: executing libtool commands
-configure:34789: === configuring in src/univalue (/data/git/PotreroCoin/src/univalue)
-configure:34850: running /bin/bash ./configure --disable-option-checking '--prefix=/usr/local'  '--disable-shared' '--with-pic' '--with-bignum=no' '--enable-module-recovery' --cache-file=/dev/null --srcdir=.
-configure:34789: === configuring in src/secp256k1 (/data/git/PotreroCoin/src/secp256k1)
-configure:34850: running /bin/bash ./configure --disable-option-checking '--prefix=/usr/local'  '--disable-shared' '--with-pic' '--with-bignum=no' '--enable-module-recovery' --cache-file=/dev/null --srcdir=.
-configure:34869: result: Fixing libtool for -rpath problems.
+configure:34793: === configuring in src/univalue (/data/git/PotreroCoin/src/univalue)
+configure:34854: running /bin/bash ./configure --disable-option-checking '--prefix=/usr/local'  '--disable-shared' '--with-pic' '--with-bignum=no' '--enable-module-recovery' --cache-file=/dev/null --srcdir=.
+configure:34793: === configuring in src/secp256k1 (/data/git/PotreroCoin/src/secp256k1)
+configure:34854: running /bin/bash ./configure --disable-option-checking '--prefix=/usr/local'  '--disable-shared' '--with-pic' '--with-bignum=no' '--enable-module-recovery' --cache-file=/dev/null --srcdir=.
+configure:34873: result: Fixing libtool for -rpath problems.
 
 ## ---------------- ##
 ## Cache variables. ##
@@ -2260,9 +2261,9 @@ AUTOCONF='${SHELL} '\''/data/git/PotreroCoin/build-aux/missing'\'' autoconf'
 AUTOHEADER='${SHELL} '\''/data/git/PotreroCoin/build-aux/missing'\'' autoheader'
 AUTOMAKE='${SHELL} '\''/data/git/PotreroCoin/build-aux/missing'\'' automake-1.16'
 AWK='mawk'
-BDB_CFLAGS='-I./db4/include'
-BDB_CPPFLAGS='-I./db4/include'
-BDB_LIBS='-L./db4/lib -ldb_cxx-4.8'
+BDB_CFLAGS='-I/data/git/PotreroCoin/db4/include'
+BDB_CPPFLAGS='-I/data/git/PotreroCoin/db4/include'
+BDB_LIBS='-L/data/git/PotreroCoin/db4/lib -ldb_cxx-4.8'
 BITCOIN_CLI_NAME='potrero-cli'
 BITCOIN_DAEMON_NAME='potrerod'
 BITCOIN_GUI_NAME='potrero-qt'

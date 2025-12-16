@@ -5,6 +5,13 @@
 
 #include "validationinterface.h"
 
+#include <boost/bind.hpp>
+#include <boost/bind/placeholders.hpp>
+
+using boost::placeholders::_1;
+using boost::placeholders::_2;
+using boost::placeholders::_3;
+
 static CMainSignals g_signals;
 
 CMainSignals& GetMainSignals()
