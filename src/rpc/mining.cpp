@@ -126,10 +126,24 @@ UniValue generateBlocks(boost::shared_ptr<CReserveScript> coinbaseScript, int nG
             LOCK(cs_main);
             IncrementExtraNonce(pblock, chainActive.Tip(), nExtraNonce);
         }
+        uint32_t startNonceCPU = pblock->nNonce;
+        int64_t t0_cpu = GetTimeMicros();
         while (nMaxTries > 0 && pblock->nNonce < nInnerLoopCount && !CheckProofOfWork(pblock->GetPoWHash(), pblock->nBits, Params().GetConsensus())) {
             ++pblock->nNonce;
             --nMaxTries;
         }
+        int64_t t1_cpu = GetTimeMicros();
+        // Calculate how many nonces were tried. If the current nonce satisfies
+        // proof-of-work, include it in the tried count.
+        bool cpuFound = CheckProofOfWork(pblock->GetPoWHash(), pblock->nBits, Params().GetConsensus());
+        uint32_t tried_cpu = pblock->nNonce - startNonceCPU + (cpuFound ? 1u : 0u);
+        double elapsed_cpu = std::max<int64_t>(1, t1_cpu - t0_cpu) * 1e-6;
+        double cpuHashRate = (double)tried_cpu / elapsed_cpu;
+        const char* cpuUnit = "H/s";
+        double cpuDisplay = cpuHashRate;
+        if (cpuHashRate >= 1e6) { cpuUnit = "MH/s"; cpuDisplay = cpuHashRate / 1e6; }
+        else if (cpuHashRate >= 1e3) { cpuUnit = "KH/s"; cpuDisplay = cpuHashRate / 1e3; }
+        LogPrintf("CPU hash rate: %.2f %s (tried=%u, elapsed=%.6fs)\n", cpuDisplay, cpuUnit, tried_cpu, elapsed_cpu);
         if (nMaxTries == 0) {
             break;
         }
@@ -172,7 +186,6 @@ UniValue generateBlocksGPU(boost::shared_ptr<CReserveScript> coinbaseScript, int
     }
     unsigned int nExtraNonce = 0;
     UniValue blockHashes(UniValue::VARR);
-    static const uint32_t kGpuChunkSize = 1024;
     while (nHeight < nHeightEnd)
     {
         std::unique_ptr<CBlockTemplate> pblocktemplate(BlockAssembler(Params()).CreateNewBlock(coinbaseScript->reserveScript));
@@ -202,7 +215,7 @@ UniValue generateBlocksGPU(boost::shared_ptr<CReserveScript> coinbaseScript, int
         bool blockSolved = false;
         while (nMaxTries > 0 && !blockSolved)
         {
-            uint32_t chunk = nMaxTries > kGpuChunkSize ? kGpuChunkSize : (uint32_t)nMaxTries;
+            uint32_t chunk = nMaxTries > UINT32_MAX ? UINT32_MAX : (uint32_t)nMaxTries;
             if (chunk == 0) {
                 break;
             }
@@ -210,7 +223,18 @@ UniValue generateBlocksGPU(boost::shared_ptr<CReserveScript> coinbaseScript, int
             uint32_t foundHash[kTargetWords] = {};
             uint32_t tried = 0;
             uint32_t foundNonce = 0;
-            bool solved = gpu::mineChunk(headerWords, pblock->nNonce, chunk, targetWords, foundNonce, foundHash, tried);
+            uint32_t startNonce = pblock->nNonce;
+            int64_t t0 = GetTimeMicros();
+            bool solved = gpu::mineChunk(headerWords, startNonce, chunk, targetWords, foundNonce, foundHash, tried);
+            int64_t t1 = GetTimeMicros();
+            double elapsed = (t1 - t0) * 1e-6; // seconds
+            if (elapsed <= 0) elapsed = 1e-6;
+            double hashRate = (double)tried / elapsed;
+            const char* unit = "H/s";
+            double displayRate = hashRate;
+            if (hashRate >= 1e6) { unit = "MH/s"; displayRate = hashRate / 1e6; }
+            else if (hashRate >= 1e3) { unit = "KH/s"; displayRate = hashRate / 1e3; }
+            LogPrintf("GPU hash rate: %.2f %s (tried=%u, elapsed=%.6fs)\n", displayRate, unit, tried, elapsed);
             if (tried == 0) {
                 int blocksLeft = nGenerate - (nHeight - nHeightStart);
                 if (blocksLeft > 0) {
@@ -224,8 +248,20 @@ UniValue generateBlocksGPU(boost::shared_ptr<CReserveScript> coinbaseScript, int
             nMaxTries -= tried;
             pblock->nNonce += tried;
             if (solved) {
-                blockSolved = true;
-                pblock->nNonce = foundNonce;
+                // Verify the GPU-found nonce on the CPU because the GPU implementation
+                // may produce spurious/non-matching results. Only set the block nonce
+                // to the found nonce when the CPU verification passes. If it fails,
+                // leave pblock->nNonce advanced past the attempted chunk so we don't
+                // retry the same invalid nonce repeatedly.
+                CBlockHeader hdr = pblock->GetBlockHeader(); hdr.nNonce = foundNonce;
+                uint256 powHash = hdr.GetPoWHash();
+                if (CheckProofOfWork(powHash, pblock->nBits, Params().GetConsensus())) {
+                    pblock->nNonce = foundNonce;
+                    blockSolved = true;
+                } else {
+                    LogPrintf("GPU miner produced invalid proof of work for nonce %u (hash=%s)\n", foundNonce, powHash.ToString());
+                    // keep pblock->nNonce as startNonce + tried (already advanced)
+                }
             }
         }
 

@@ -6,6 +6,7 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <string.h>
+#include <algorithm>
 
 namespace {
 
@@ -45,9 +46,13 @@ struct GpuContext {
     uint32_t* targetWords;
     GpuResult* result;
     bool ready;
+    uint32_t blockSize;
+    uint32_t maxBlocks;
+    uint32_t workPerThread;
+    uint32_t maxNoncesPerLaunch;
 };
 
-static GpuContext g_context = {0, nullptr, nullptr, nullptr, false};
+static GpuContext g_context = {0, nullptr, nullptr, nullptr, false, 0, 0, 0, 0};
 static bool g_cuda_checked = false;
 static bool g_cuda_available = false;
 
@@ -70,6 +75,10 @@ inline void cleanupContext(GpuContext& ctx)
         ctx.stream = 0;
     }
     ctx.ready = false;
+    ctx.blockSize = 0;
+    ctx.maxBlocks = 0;
+    ctx.workPerThread = 0;
+    ctx.maxNoncesPerLaunch = 0;
 }
 
 bool ensureContext()
@@ -90,11 +99,42 @@ bool ensureContext()
         return false;
     }
 
+    cudaDeviceProp prop;
+    if (cudaGetDeviceProperties(&prop, 0) != cudaSuccess) {
+        g_cuda_available = false;
+        return false;
+    }
+
+    uint64_t threadsByMemory = prop.totalGlobalMem / kScryptScratchpadSize;
+    uint64_t threadsBySM = (uint64_t)prop.multiProcessorCount * prop.maxThreadsPerMultiProcessor;
+    uint64_t maxThreadsTotal = std::min(threadsByMemory, threadsBySM);
+    if (maxThreadsTotal == 0) {
+        g_cuda_available = false;
+        return false;
+    }
+
+    uint32_t blockSize = std::min<uint32_t>(256u, prop.maxThreadsPerBlock);
+    while (blockSize > 1 && blockSize > maxThreadsTotal)
+        blockSize >>= 1;
+    if (blockSize == 0)
+        blockSize = 1;
+
+    uint64_t maxBlocks = (maxThreadsTotal + blockSize - 1) / blockSize;
+    uint64_t maxGridX = static_cast<uint64_t>(prop.maxGridSize[0]);
+    if (maxBlocks > maxGridX)
+        maxBlocks = maxGridX;
+    if (maxBlocks == 0)
+        maxBlocks = 1;
+
     GpuContext& ctx = g_context;
     ctx.stream = 0;
     ctx.headerWords = nullptr;
     ctx.targetWords = nullptr;
     ctx.result = nullptr;
+    ctx.blockSize = blockSize;
+    ctx.maxBlocks = static_cast<uint32_t>(maxBlocks);
+    ctx.workPerThread = 8;
+    ctx.maxNoncesPerLaunch = 0;
 
     if (cudaStreamCreate(&ctx.stream) != cudaSuccess) {
         cleanupContext(ctx);
@@ -116,6 +156,15 @@ bool ensureContext()
         g_cuda_available = false;
         return false;
     }
+
+    uint64_t actualBlocks = ctx.maxBlocks;
+    uint64_t maxNonces = actualBlocks * ctx.blockSize * ctx.workPerThread;
+    if (maxNonces == 0) {
+        cleanupContext(ctx);
+        g_cuda_available = false;
+        return false;
+    }
+    ctx.maxNoncesPerLaunch = maxNonces > UINT32_MAX ? UINT32_MAX : static_cast<uint32_t>(maxNonces);
 
     ctx.ready = true;
     g_cuda_available = true;
@@ -428,11 +477,17 @@ __device__ inline bool hash_leq(const uint32_t hash[kTargetWords], const uint32_
 
 __global__ void gpu_scrypt_kernel(const uint32_t* headerWords,
                                   uint32_t startNonce,
-                                  uint32_t tries,
+                                  uint32_t totalNonces,
+                                  uint32_t noncesPerThread,
                                   const uint32_t* targetWords,
                                   GpuResult* result)
 {
-    if (tries == 0)
+    if (totalNonces == 0 || noncesPerThread == 0)
+        return;
+
+    volatile uint32_t* foundFlag = &result->found;
+    uint32_t* atomicFoundFlag = &result->found;
+    if (*foundFlag)
         return;
 
     uint8_t headerBytes[80];
@@ -440,28 +495,33 @@ __global__ void gpu_scrypt_kernel(const uint32_t* headerWords,
         write_le32(headerBytes + 4 * idx, headerWords[idx]);
 
     uint8_t scratchpad[kScryptScratchpadSize];
-    uint32_t attempts = 0;
-    for (uint32_t trial = 0; trial < tries; ++trial) {
-        uint32_t currentNonce = startNonce + trial;
+    uint32_t hashWords[kTargetWords];
+    uint32_t tid = blockIdx.x * blockDim.x + threadIdx.x;
+    uint64_t baseIndex = static_cast<uint64_t>(tid) * noncesPerThread;
+
+    for (uint32_t iteration = 0; iteration < noncesPerThread; ++iteration) {
+        if (*foundFlag)
+            return;
+        uint64_t globalIndex = baseIndex + iteration;
+        if (globalIndex >= totalNonces)
+            break;
+        uint32_t currentNonce = startNonce + static_cast<uint32_t>(globalIndex);
         write_le32(headerBytes + 76, currentNonce);
         uint8_t hash[32];
         scrypt_1024_1_1_256(headerBytes, hash, scratchpad);
-        uint32_t hashWords[kTargetWords];
         for (int w = 0; w < kTargetWords; ++w)
             hashWords[w] = read_le32(hash + 4 * w);
 
         if (hash_leq(hashWords, targetWords)) {
-            if (atomicCAS(&result->found, 0u, 1u) == 0u) {
+            if (atomicCAS(atomicFoundFlag, 0u, 1u) == 0u) {
                 result->nonce = currentNonce;
                 for (int w = 0; w < kTargetWords; ++w)
                     result->hash[w] = hashWords[w];
-                result->tried = trial + 1;
+                result->tried = static_cast<uint32_t>(globalIndex + 1);
             }
             return;
         }
-        attempts = trial + 1;
     }
-    result->tried = attempts;
 }
 
 } // namespace
@@ -487,6 +547,14 @@ bool mineChunk(const uint32_t headerWords[20], uint32_t startNonce, uint32_t tri
     }
 
     GpuContext& ctx = g_context;
+    uint32_t chunk = tries;
+    if (chunk > ctx.maxNoncesPerLaunch)
+        chunk = ctx.maxNoncesPerLaunch;
+    if (chunk == 0) {
+        tried = 0;
+        return false;
+    }
+
     if (cudaMemcpyAsync(ctx.headerWords, headerWords, kHeaderWords * sizeof(uint32_t),
                         cudaMemcpyHostToDevice, ctx.stream) != cudaSuccess) {
         return disableCuda();
@@ -501,7 +569,33 @@ bool mineChunk(const uint32_t headerWords[20], uint32_t startNonce, uint32_t tri
         return disableCuda();
     }
 
-    gpu_scrypt_kernel<<<1, 1, 0, ctx.stream>>>(ctx.headerWords, startNonce, tries, ctx.targetWords, ctx.result);
+    uint64_t totalThreadCapacity = static_cast<uint64_t>(ctx.blockSize) * ctx.maxBlocks;
+    uint64_t threadsToUse64 = chunk;
+    if (threadsToUse64 > totalThreadCapacity)
+        threadsToUse64 = totalThreadCapacity;
+    if (threadsToUse64 == 0) {
+        tried = 0;
+        return false;
+    }
+    if (threadsToUse64 > UINT32_MAX)
+        threadsToUse64 = UINT32_MAX;
+    uint32_t threadCount = static_cast<uint32_t>(threadsToUse64);
+    uint32_t blocks = (threadCount + ctx.blockSize - 1) / ctx.blockSize;
+    if (blocks == 0)
+        blocks = 1;
+    if (blocks > ctx.maxBlocks)
+        blocks = ctx.maxBlocks;
+    uint32_t totalThreadsLaunched = blocks * ctx.blockSize;
+    if (totalThreadsLaunched == 0) {
+        tried = 0;
+        return false;
+    }
+    uint32_t noncesPerThread = (chunk + totalThreadsLaunched - 1) / totalThreadsLaunched;
+    if (noncesPerThread == 0)
+        noncesPerThread = 1;
+
+    gpu_scrypt_kernel<<<blocks, ctx.blockSize, 0, ctx.stream>>>(ctx.headerWords, startNonce, chunk, noncesPerThread,
+                                                               ctx.targetWords, ctx.result);
 
     if (cudaStreamSynchronize(ctx.stream) != cudaSuccess) {
         return disableCuda();
@@ -512,7 +606,7 @@ bool mineChunk(const uint32_t headerWords[20], uint32_t startNonce, uint32_t tri
         return disableCuda();
     }
 
-    tried = hostResult.tried ? hostResult.tried : tries;
+    tried = hostResult.tried ? hostResult.tried : chunk;
     if (hostResult.found) {
         foundNonce = hostResult.nonce;
         for (int i = 0; i < kTargetWords; ++i)
