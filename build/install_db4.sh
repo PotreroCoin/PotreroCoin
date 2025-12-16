@@ -8,19 +8,25 @@
 export LC_ALL=C
 set -e
 
-if [ -z "${1}" ]; then
-  echo "Usage: $0 <base-dir> [<extra-bdb-configure-flag> ...]"
-  echo
-  echo "Must specify a single argument: the directory in which db4 will be built."
-  echo "This is probably \`pwd\` if you're at the root of the litecoin repository."
-  exit 1
-fi
+# Base directory defaults to the current working directory when unspecified.
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd -P)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd -P)"
+DEPENDS_CONFIG_GUESS="${REPO_ROOT}/depends/config.guess"
+DEPENDS_CONFIG_SUB="${REPO_ROOT}/depends/config.sub"
 
 expand_path() {
   cd "${1}" && pwd -P
 }
 
-BDB_PREFIX="$(expand_path ${1})/db4"; shift;
+if [ $# -gt 0 ] && [ "${1#-}" = "${1}" ]; then
+  BDB_BASE_ARG="${1}"
+  shift
+else
+  BDB_BASE_ARG="."
+fi
+
+BDB_PREFIX="$(expand_path "${BDB_BASE_ARG}")/db4"
 BDB_VERSION='db-4.8.30.NC'
 BDB_HASH='12edc0df75bf9abd7f82f821795bcee50f42cb2e5f76a6a281b85732798364ef'
 BDB_URL="https://download.oracle.com/berkeley-db/${BDB_VERSION}.tar.gz"
@@ -62,6 +68,11 @@ http_get() {
   sha256_check "${3}" "${2}"
 }
 
+copy_config_from_depends() {
+  cp "$1" "dist/$(basename "$1")"
+  chmod +x "dist/$(basename "$1")"
+}
+
 mkdir -p "${BDB_PREFIX}"
 http_get "${BDB_URL}" "${BDB_VERSION}.tar.gz" "${BDB_HASH}"
 tar -xzvf ${BDB_VERSION}.tar.gz -C "$BDB_PREFIX"
@@ -84,8 +95,14 @@ CONFIG_SUB_HASH='3a4befde9bcdf0fdb2763fc1bfa74e8696df94e1ad7aac8042d133c8ff1d2e3
 rm -f "dist/config.guess"
 rm -f "dist/config.sub"
 
-http_get "${CONFIG_GUESS_URL}" dist/config.guess "${CONFIG_GUESS_HASH}"
-http_get "${CONFIG_SUB_URL}" dist/config.sub "${CONFIG_SUB_HASH}"
+if [ -f "${DEPENDS_CONFIG_GUESS}" ] && [ -f "${DEPENDS_CONFIG_SUB}" ]; then
+  copy_config_from_depends "${DEPENDS_CONFIG_GUESS}"
+  copy_config_from_depends "${DEPENDS_CONFIG_SUB}"
+else
+  http_get "${CONFIG_GUESS_URL}" dist/config.guess "${CONFIG_GUESS_HASH}"
+  http_get "${CONFIG_SUB_URL}" dist/config.sub "${CONFIG_SUB_HASH}"
+fi
+
 
 cd build_unix/
 

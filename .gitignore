@@ -1,0 +1,31 @@
+# Ignore build artifacts, temporary files, and bundled db4 packages.
+
+# Autotools/build helpers
+autom4te.cache/
+build/
+build-aux/
+config.log
+config.status
+configure~
+libtool
+ltmain.sh
+missing
+*.lo
+*.o
+*.la
+*.al
+*.rej
+
+# Generated per-directory dependency files
+src/**/*.Po
+src/**/*.mo
+
+# Database/binary bundles and installation outputs
+/db4/
+db-4.8.30.NC*
+
+# Misc
+*.pyc
+*~
+.DS_Store
+__pycache__/

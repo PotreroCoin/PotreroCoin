@@ -596,6 +596,12 @@ AC_SUBST(LIBLEVELDB)
 AC_SUBST(LIBMEMENV)
 
 if test x$enable_wallet != xno; then
+    if test "x$BDB_CFLAGS" = "x" && test -d "${srcdir}/db4/include"; then
+      BDB_CFLAGS="-I${srcdir}/db4/include"
+    fi
+    if test "x$BDB_LIBS" = "x" && test -d "${srcdir}/db4/lib"; then
+      BDB_LIBS="-L${srcdir}/db4/lib -ldb_cxx-4.8"
+    fi
     dnl Check for libdb_cxx only if wallet enabled
     BITCOIN_FIND_BDB48
 fi
