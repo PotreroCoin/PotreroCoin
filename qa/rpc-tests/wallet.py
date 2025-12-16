@@ -301,6 +301,12 @@ class WalletTest (BitcoinTestFramework):
         # Check that the txid and balance is found by node1
         self.nodes[1].gettransaction(cbTxId)
 
+        # Request the GPU path as a regression check (uses CPU fallback in this build)
+        gpuBlkHash = self.nodes[0].generatetoaddress(1, cbAddr, "gpu")[0]
+        gpuTxId = self.nodes[0].getblock(gpuBlkHash)['tx'][0]
+        self.sync_all()
+        self.nodes[1].gettransaction(gpuTxId)
+
         # check if wallet or blockchain maintenance changes the balance
         self.sync_all()
         blocks = self.nodes[0].generate(2)

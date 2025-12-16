@@ -19,12 +19,17 @@
 #include "rpc/server.h"
 #include "txmempool.h"
 #include "util.h"
+#include "arith_uint256.h"
+#include "gpu_miner.h"
+#include "uint256.h"
 #include "utilstrencodings.h"
 #include "validationinterface.h"
 
 #include <memory>
 #include <stdint.h>
+#include <cstring>
 
+#include <boost/algorithm/string.hpp>
 #include <boost/assign/list_of.hpp>
 #include <boost/shared_ptr.hpp>
 
@@ -146,6 +151,103 @@ UniValue generateBlocks(boost::shared_ptr<CReserveScript> coinbaseScript, int nG
     return blockHashes;
 }
 
+UniValue generateBlocksGPU(boost::shared_ptr<CReserveScript> coinbaseScript, int nGenerate, uint64_t nMaxTries, bool keepScript)
+{
+    if (!gpu::available()) {
+        return generateBlocks(coinbaseScript, nGenerate, nMaxTries, keepScript);
+    }
+
+    static const size_t kHeaderWords = sizeof(CBlockHeader) / sizeof(uint32_t);
+    static const size_t kTargetWords = sizeof(uint256) / sizeof(uint32_t);
+
+    int nHeightStart = 0;
+    int nHeightEnd = 0;
+    int nHeight = 0;
+
+    {   // Don't keep cs_main locked
+        LOCK(cs_main);
+        nHeightStart = chainActive.Height();
+        nHeight = nHeightStart;
+        nHeightEnd = nHeightStart+nGenerate;
+    }
+    unsigned int nExtraNonce = 0;
+    UniValue blockHashes(UniValue::VARR);
+    static const uint32_t kGpuChunkSize = 1024;
+    while (nHeight < nHeightEnd)
+    {
+        std::unique_ptr<CBlockTemplate> pblocktemplate(BlockAssembler(Params()).CreateNewBlock(coinbaseScript->reserveScript));
+        if (!pblocktemplate.get())
+            throw JSONRPCError(RPC_INTERNAL_ERROR, "Couldn't create new block");
+        CBlock *pblock = &pblocktemplate->block;
+        {
+            LOCK(cs_main);
+            IncrementExtraNonce(pblock, chainActive.Tip(), nExtraNonce);
+        }
+
+        CBlockHeader header = pblock->GetBlockHeader();
+        arith_uint256 bnTarget;
+        bool fNegative = false, fOverflow = false;
+        bnTarget.SetCompact(pblock->nBits, &fNegative, &fOverflow);
+        if (fNegative || fOverflow || bnTarget == 0) {
+            break;
+        }
+
+        uint256 target = ArithToUint256(bnTarget);
+        uint32_t targetWords[kTargetWords];
+        memcpy(targetWords, target.begin(), 32);
+
+        uint32_t headerWords[kHeaderWords];
+        memcpy(headerWords, &header, sizeof(header));
+
+        bool blockSolved = false;
+        while (nMaxTries > 0 && !blockSolved)
+        {
+            uint32_t chunk = nMaxTries > kGpuChunkSize ? kGpuChunkSize : (uint32_t)nMaxTries;
+            if (chunk == 0) {
+                break;
+            }
+
+            uint32_t foundHash[kTargetWords] = {};
+            uint32_t tried = 0;
+            uint32_t foundNonce = 0;
+            bool solved = gpu::mineChunk(headerWords, pblock->nNonce, chunk, targetWords, foundNonce, foundHash, tried);
+            if (tried == 0) {
+                int blocksLeft = nGenerate - (nHeight - nHeightStart);
+                if (blocksLeft > 0) {
+                    UniValue fallback = generateBlocks(coinbaseScript, blocksLeft, nMaxTries, keepScript);
+                    for (unsigned int idx = 0; idx < fallback.size(); ++idx)
+                        blockHashes.push_back(fallback[idx]);
+                }
+                return blockHashes;
+            }
+
+            nMaxTries -= tried;
+            pblock->nNonce += tried;
+            if (solved) {
+                blockSolved = true;
+                pblock->nNonce = foundNonce;
+            }
+        }
+
+        if (!blockSolved) {
+            break;
+        }
+
+        std::shared_ptr<const CBlock> shared_pblock = std::make_shared<const CBlock>(*pblock);
+        if (!ProcessNewBlock(Params(), shared_pblock, true, NULL))
+            throw JSONRPCError(RPC_INTERNAL_ERROR, "ProcessNewBlock, block not accepted");
+        ++nHeight;
+        blockHashes.push_back(pblock->GetHash().GetHex());
+
+        //mark script as important because it was used at least for one coinbase output if the script came from the wallet
+        if (keepScript)
+        {
+            coinbaseScript->KeepScript();
+        }
+    }
+    return blockHashes;
+}
+
 UniValue generate(const JSONRPCRequest& request)
 {
     if (request.fHelp || request.params.size() < 1 || request.params.size() > 2)
@@ -184,25 +286,46 @@ UniValue generate(const JSONRPCRequest& request)
 
 UniValue generatetoaddress(const JSONRPCRequest& request)
 {
-    if (request.fHelp || request.params.size() < 2 || request.params.size() > 3)
+    if (request.fHelp || request.params.size() < 2 || request.params.size() > 4)
         throw runtime_error(
-            "generatetoaddress nblocks address (maxtries)\n"
+            "generatetoaddress nblocks address (maxtries|gpu) (maxtries)\n"
             "\nMine blocks immediately to a specified address (before the RPC call returns)\n"
             "\nArguments:\n"
             "1. nblocks      (numeric, required) How many blocks are generated immediately.\n"
             "2. address      (string, required) The address to send the newly generated potrero to.\n"
-            "3. maxtries     (numeric, optional) How many iterations to try (default = 1000000).\n"
+            "3. maxtries     (numeric, optional) How many iterations to try (default = 1000000) when mining on the CPU.\n"
+            "   gpu          (string, optional) Request the GPU mining path instead of passing maxtries here.\n"
+            "4. maxtries     (numeric, optional) How many iterations to try when GPU mode is requested (default = 1000000).\n"
             "\nResult:\n"
             "[ blockhashes ]     (array) hashes of blocks generated\n"
             "\nExamples:\n"
             "\nGenerate 11 blocks to myaddress\n"
             + HelpExampleCli("generatetoaddress", "11 \"myaddress\"")
+            + HelpExampleCli("generatetoaddress", "11 \"myaddress\" gpu")
         );
 
     int nGenerate = request.params[0].get_int();
     uint64_t nMaxTries = 1000000;
+    bool useGPU = false;
+
     if (request.params.size() > 2) {
-        nMaxTries = request.params[2].get_int();
+        const UniValue& arg = request.params[2];
+        if (arg.isStr()) {
+            std::string mode = arg.get_str();
+            if (boost::algorithm::iequals(mode, "gpu")) {
+                useGPU = true;
+                if (request.params.size() > 3) {
+                    nMaxTries = request.params[3].get_int();
+                }
+            } else {
+                throw JSONRPCError(RPC_INVALID_PARAMETER, strprintf("Unknown mode \"%s\"; use \"gpu\" to enable GPU mining", mode));
+            }
+        } else {
+            nMaxTries = arg.get_int();
+            if (request.params.size() > 3) {
+                throw JSONRPCError(RPC_INVALID_PARAMETER, "Too many parameters specified");
+            }
+        }
     }
 
     CBitcoinAddress address(request.params[1].get_str());
@@ -212,6 +335,9 @@ UniValue generatetoaddress(const JSONRPCRequest& request)
     boost::shared_ptr<CReserveScript> coinbaseScript(new CReserveScript());
     coinbaseScript->reserveScript = GetScriptForDestination(address.Get());
 
+    if (useGPU) {
+        return generateBlocksGPU(coinbaseScript, nGenerate, nMaxTries, false);
+    }
     return generateBlocks(coinbaseScript, nGenerate, nMaxTries, false);
 }
 

@@ -70,6 +70,9 @@
 /* Define this symbol if the consensus lib has been built */
 #undef HAVE_CONSENSUS_LIB
 
+/* Define if CUDA GPU mining support is enabled */
+#undef HAVE_CUDA
+
 /* define if the compiler supports basic C++11 syntax */
 #undef HAVE_CXX11
 

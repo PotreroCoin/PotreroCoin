@@ -114,32 +114,34 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
+@USE_CUDA_TRUE@am__append_1 = $(CUDA_RUNTIME_LIBS)
 bin_PROGRAMS = $(am__EXEEXT_1) $(am__EXEEXT_2) $(am__EXEEXT_3) \
 	$(am__EXEEXT_4) $(am__EXEEXT_5) $(am__EXEEXT_6)
 noinst_PROGRAMS = $(am__EXEEXT_7)
 TESTS = $(am__EXEEXT_3) $(am__EXEEXT_6)
-@BUILD_BITCOIND_TRUE@am__append_1 = potrerod
-@BUILD_BITCOIN_UTILS_TRUE@am__append_2 = potrero-cli potrero-tx
-@GLIBC_BACK_COMPAT_TRUE@am__append_3 = compat/glibc_compat.cpp
-@TARGET_WINDOWS_TRUE@am__append_4 = bitcoind-res.rc
-@TARGET_WINDOWS_TRUE@am__append_5 = bitcoin-cli-res.rc
-@TARGET_WINDOWS_TRUE@am__append_6 = bitcoin-tx-res.rc
-@BUILD_BITCOIN_LIBS_TRUE@@GLIBC_BACK_COMPAT_TRUE@am__append_7 = compat/glibc_compat.cpp
-@EMBEDDED_LEVELDB_TRUE@am__append_8 = $(LIBLEVELDB_INT) \
+@BUILD_BITCOIND_TRUE@am__append_2 = potrerod
+@BUILD_BITCOIN_UTILS_TRUE@am__append_3 = potrero-cli potrero-tx
+@USE_CUDA_TRUE@am__append_4 = gpu_miner.cu
+@GLIBC_BACK_COMPAT_TRUE@am__append_5 = compat/glibc_compat.cpp
+@TARGET_WINDOWS_TRUE@am__append_6 = bitcoind-res.rc
+@TARGET_WINDOWS_TRUE@am__append_7 = bitcoin-cli-res.rc
+@TARGET_WINDOWS_TRUE@am__append_8 = bitcoin-tx-res.rc
+@BUILD_BITCOIN_LIBS_TRUE@@GLIBC_BACK_COMPAT_TRUE@am__append_9 = compat/glibc_compat.cpp
+@EMBEDDED_LEVELDB_TRUE@am__append_10 = $(LIBLEVELDB_INT) \
 @EMBEDDED_LEVELDB_TRUE@	$(LIBMEMENV_INT)
-@EMBEDDED_LEVELDB_TRUE@am__append_9 = $(LIBLEVELDB_INT)
-@EMBEDDED_LEVELDB_TRUE@am__append_10 = $(LIBMEMENV_INT)
-@EMBEDDED_LEVELDB_TRUE@am__append_11 = -I$(srcdir)/leveldb/include \
+@EMBEDDED_LEVELDB_TRUE@am__append_11 = $(LIBLEVELDB_INT)
+@EMBEDDED_LEVELDB_TRUE@am__append_12 = $(LIBMEMENV_INT)
+@EMBEDDED_LEVELDB_TRUE@am__append_13 = -I$(srcdir)/leveldb/include \
 @EMBEDDED_LEVELDB_TRUE@	-I$(srcdir)/leveldb/helpers/memenv
-@EMBEDDED_LEVELDB_TRUE@@TARGET_WINDOWS_TRUE@am__append_12 = -DLEVELDB_PLATFORM_WINDOWS -DWINVER=0x0500 -D__USE_MINGW_ANSI_STDIO=1
-@EMBEDDED_LEVELDB_TRUE@@TARGET_WINDOWS_FALSE@am__append_13 = -DLEVELDB_PLATFORM_POSIX
-@EMBEDDED_LEVELDB_TRUE@@TARGET_WINDOWS_TRUE@am__append_14 = leveldb/util/env_win.cc \
+@EMBEDDED_LEVELDB_TRUE@@TARGET_WINDOWS_TRUE@am__append_14 = -DLEVELDB_PLATFORM_WINDOWS -DWINVER=0x0500 -D__USE_MINGW_ANSI_STDIO=1
+@EMBEDDED_LEVELDB_TRUE@@TARGET_WINDOWS_FALSE@am__append_15 = -DLEVELDB_PLATFORM_POSIX
+@EMBEDDED_LEVELDB_TRUE@@TARGET_WINDOWS_TRUE@am__append_16 = leveldb/util/env_win.cc \
 @EMBEDDED_LEVELDB_TRUE@@TARGET_WINDOWS_TRUE@	leveldb/port/port_win.cc
-@EMBEDDED_LEVELDB_TRUE@@TARGET_WINDOWS_FALSE@am__append_15 = leveldb/port/port_posix.cc
-@ENABLE_TESTS_TRUE@am__append_16 = test/test_potrero
-@ENABLE_TESTS_TRUE@am__append_17 = test/test_potrero
-@ENABLE_TESTS_TRUE@am__append_18 = test/test_potrero_fuzzy
-@ENABLE_TESTS_TRUE@am__append_19 = \
+@EMBEDDED_LEVELDB_TRUE@@TARGET_WINDOWS_FALSE@am__append_17 = leveldb/port/port_posix.cc
+@ENABLE_TESTS_TRUE@am__append_18 = test/test_potrero
+@ENABLE_TESTS_TRUE@am__append_19 = test/test_potrero
+@ENABLE_TESTS_TRUE@am__append_20 = test/test_potrero_fuzzy
+@ENABLE_TESTS_TRUE@am__append_21 = \
 @ENABLE_TESTS_TRUE@	test/bctest.py \
 @ENABLE_TESTS_TRUE@	test/bitcoin-util-test.py \
 @ENABLE_TESTS_TRUE@	test/data/bitcoin-util-test.json \
@@ -192,42 +194,42 @@ TESTS = $(am__EXEEXT_3) $(am__EXEEXT_6)
 @ENABLE_TESTS_TRUE@	test/data/txcreatesignv1.json \
 @ENABLE_TESTS_TRUE@	test/data/txcreatesignv2.hex
 
-@ENABLE_TESTS_TRUE@@ENABLE_WALLET_TRUE@am__append_20 = \
+@ENABLE_TESTS_TRUE@@ENABLE_WALLET_TRUE@am__append_22 = \
 @ENABLE_TESTS_TRUE@@ENABLE_WALLET_TRUE@  wallet/test/wallet_test_fixture.cpp \
 @ENABLE_TESTS_TRUE@@ENABLE_WALLET_TRUE@  wallet/test/wallet_test_fixture.h \
 @ENABLE_TESTS_TRUE@@ENABLE_WALLET_TRUE@  wallet/test/accounting_tests.cpp \
 @ENABLE_TESTS_TRUE@@ENABLE_WALLET_TRUE@  wallet/test/wallet_tests.cpp \
 @ENABLE_TESTS_TRUE@@ENABLE_WALLET_TRUE@  wallet/test/crypto_tests.cpp
 
-@ENABLE_TESTS_TRUE@@ENABLE_WALLET_TRUE@am__append_21 = $(LIBBITCOIN_WALLET)
-@ENABLE_TESTS_TRUE@@ENABLE_ZMQ_TRUE@am__append_22 = $(ZMQ_LIBS)
-@ENABLE_TESTS_TRUE@am__append_23 = $(CLEAN_BITCOIN_TEST)
+@ENABLE_TESTS_TRUE@@ENABLE_WALLET_TRUE@am__append_23 = $(LIBBITCOIN_WALLET)
+@ENABLE_TESTS_TRUE@@ENABLE_ZMQ_TRUE@am__append_24 = $(ZMQ_LIBS)
+@ENABLE_TESTS_TRUE@am__append_25 = $(CLEAN_BITCOIN_TEST)
 
 # This file is problematic for out-of-tree builds if it exists.
-@ENABLE_TESTS_TRUE@am__append_24 = test/buildenv.pyc
-@ENABLE_BENCH_TRUE@am__append_25 = bench/bench_potrero
-@ENABLE_BENCH_TRUE@@ENABLE_ZMQ_TRUE@am__append_26 = $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
-@ENABLE_BENCH_TRUE@@ENABLE_WALLET_TRUE@am__append_27 = bench/coin_selection.cpp
-@ENABLE_BENCH_TRUE@@ENABLE_WALLET_TRUE@am__append_28 = $(LIBBITCOIN_WALLET) $(LIBBITCOIN_CRYPTO)
-@ENABLE_BENCH_TRUE@am__append_29 = $(CLEAN_BITCOIN_BENCH)
-@ENABLE_QT_TRUE@am__append_30 = qt/potrero-qt
-@ENABLE_QT_TRUE@am__append_31 = qt/libbitcoinqt.a
-@ENABLE_QT_TRUE@@TARGET_WINDOWS_TRUE@am__append_32 = $(BITCOIN_QT_WINDOWS_CPP)
-@ENABLE_QT_TRUE@@ENABLE_WALLET_TRUE@am__append_33 = $(BITCOIN_QT_WALLET_CPP)
-@ENABLE_QT_TRUE@@TARGET_DARWIN_TRUE@am__append_34 = $(BITCOIN_MM)
-@ENABLE_QT_TRUE@@TARGET_WINDOWS_TRUE@am__append_35 = $(BITCOIN_RC)
-@ENABLE_QT_TRUE@@ENABLE_WALLET_TRUE@am__append_36 = $(LIBBITCOIN_WALLET)
-@ENABLE_QT_TRUE@@ENABLE_ZMQ_TRUE@am__append_37 = $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
-@ENABLE_QT_TRUE@am__append_38 = $(CLEAN_QT)
-@ENABLE_QT_TESTS_TRUE@am__append_39 = qt/test/test_potrero-qt
-@ENABLE_QT_TESTS_TRUE@am__append_40 = qt/test/test_potrero-qt
-@ENABLE_QT_TESTS_TRUE@@ENABLE_WALLET_TRUE@am__append_41 = qt/test/moc_paymentservertests.cpp
-@ENABLE_QT_TESTS_TRUE@@ENABLE_WALLET_TRUE@am__append_42 = \
+@ENABLE_TESTS_TRUE@am__append_26 = test/buildenv.pyc
+@ENABLE_BENCH_TRUE@am__append_27 = bench/bench_potrero
+@ENABLE_BENCH_TRUE@@ENABLE_ZMQ_TRUE@am__append_28 = $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+@ENABLE_BENCH_TRUE@@ENABLE_WALLET_TRUE@am__append_29 = bench/coin_selection.cpp
+@ENABLE_BENCH_TRUE@@ENABLE_WALLET_TRUE@am__append_30 = $(LIBBITCOIN_WALLET) $(LIBBITCOIN_CRYPTO)
+@ENABLE_BENCH_TRUE@am__append_31 = $(CLEAN_BITCOIN_BENCH)
+@ENABLE_QT_TRUE@am__append_32 = qt/potrero-qt
+@ENABLE_QT_TRUE@am__append_33 = qt/libbitcoinqt.a
+@ENABLE_QT_TRUE@@TARGET_WINDOWS_TRUE@am__append_34 = $(BITCOIN_QT_WINDOWS_CPP)
+@ENABLE_QT_TRUE@@ENABLE_WALLET_TRUE@am__append_35 = $(BITCOIN_QT_WALLET_CPP)
+@ENABLE_QT_TRUE@@TARGET_DARWIN_TRUE@am__append_36 = $(BITCOIN_MM)
+@ENABLE_QT_TRUE@@TARGET_WINDOWS_TRUE@am__append_37 = $(BITCOIN_RC)
+@ENABLE_QT_TRUE@@ENABLE_WALLET_TRUE@am__append_38 = $(LIBBITCOIN_WALLET)
+@ENABLE_QT_TRUE@@ENABLE_ZMQ_TRUE@am__append_39 = $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+@ENABLE_QT_TRUE@am__append_40 = $(CLEAN_QT)
+@ENABLE_QT_TESTS_TRUE@am__append_41 = qt/test/test_potrero-qt
+@ENABLE_QT_TESTS_TRUE@am__append_42 = qt/test/test_potrero-qt
+@ENABLE_QT_TESTS_TRUE@@ENABLE_WALLET_TRUE@am__append_43 = qt/test/moc_paymentservertests.cpp
+@ENABLE_QT_TESTS_TRUE@@ENABLE_WALLET_TRUE@am__append_44 = \
 @ENABLE_QT_TESTS_TRUE@@ENABLE_WALLET_TRUE@  qt/test/paymentservertests.cpp
 
-@ENABLE_QT_TESTS_TRUE@@ENABLE_WALLET_TRUE@am__append_43 = $(LIBBITCOIN_WALLET)
-@ENABLE_QT_TESTS_TRUE@@ENABLE_ZMQ_TRUE@am__append_44 = $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
-@ENABLE_QT_TESTS_TRUE@am__append_45 = $(CLEAN_BITCOIN_QT_TEST)
+@ENABLE_QT_TESTS_TRUE@@ENABLE_WALLET_TRUE@am__append_45 = $(LIBBITCOIN_WALLET)
+@ENABLE_QT_TESTS_TRUE@@ENABLE_ZMQ_TRUE@am__append_46 = $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+@ENABLE_QT_TESTS_TRUE@am__append_47 = $(CLEAN_BITCOIN_QT_TEST)
 subdir = src
 SUBDIRS =
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -466,7 +468,41 @@ am_libbitcoin_consensus_a_OBJECTS =  \
 	libbitcoin_consensus_a-utilstrencodings.$(OBJEXT)
 libbitcoin_consensus_a_OBJECTS = $(am_libbitcoin_consensus_a_OBJECTS)
 libbitcoin_server_a_AR = $(AR) $(ARFLAGS)
-libbitcoin_server_a_LIBADD =
+libbitcoin_server_a_DEPENDENCIES =
+am__libbitcoin_server_a_SOURCES_DIST = addrman.cpp addrdb.cpp \
+	bloom.cpp blockencodings.cpp chain.cpp checkpoints.cpp \
+	httprpc.cpp httpserver.cpp init.cpp dbwrapper.cpp \
+	merkleblock.cpp miner.cpp net.cpp net_processing.cpp noui.cpp \
+	policy/fees.cpp policy/policy.cpp pow.cpp rest.cpp \
+	rpc/blockchain.cpp rpc/mining.cpp rpc/misc.cpp rpc/net.cpp \
+	rpc/rawtransaction.cpp rpc/server.cpp script/sigcache.cpp \
+	script/ismine.cpp timedata.cpp torcontrol.cpp txdb.cpp \
+	txmempool.cpp ui_interface.cpp validation.cpp \
+	validationinterface.cpp versionbits.cpp addrdb.h addrman.h \
+	base58.h bloom.h blockencodings.h chain.h chainparams.h \
+	chainparamsbase.h chainparamsseeds.h checkpoints.h \
+	checkqueue.h clientversion.h coins.h compat.h \
+	compat/byteswap.h compat/endian.h compat/sanity.h compressor.h \
+	consensus/consensus.h core_io.h core_memusage.h cuckoocache.h \
+	httprpc.h httpserver.h indirectmap.h init.h key.h keystore.h \
+	dbwrapper.h limitedmap.h memusage.h merkleblock.h miner.h \
+	net.h net_processing.h netaddress.h netbase.h \
+	netmessagemaker.h noui.h policy/fees.h policy/policy.h \
+	policy/rbf.h pow.h protocol.h random.h reverselock.h \
+	rpc/client.h rpc/protocol.h rpc/server.h rpc/register.h \
+	scheduler.h script/sigcache.h script/sign.h script/standard.h \
+	script/ismine.h streams.h support/allocators/secure.h \
+	support/allocators/zeroafterfree.h support/cleanse.h \
+	support/events.h support/lockedpool.h sync.h threadsafety.h \
+	threadinterrupt.h timedata.h torcontrol.h txdb.h txmempool.h \
+	ui_interface.h undo.h util.h utilmoneystr.h utiltime.h \
+	validation.h validationinterface.h versionbits.h \
+	wallet/coincontrol.h wallet/crypter.h wallet/db.h \
+	wallet/rpcwallet.h wallet/wallet.h wallet/walletdb.h \
+	warnings.h zmq/zmqabstractnotifier.h zmq/zmqconfig.h \
+	zmq/zmqnotificationinterface.h zmq/zmqpublishnotifier.h \
+	gpu_miner.cu
+@USE_CUDA_TRUE@am__objects_4 = gpu_miner.$(OBJEXT)
 am_libbitcoin_server_a_OBJECTS =  \
 	libbitcoin_server_a-addrman.$(OBJEXT) \
 	libbitcoin_server_a-addrdb.$(OBJEXT) \
@@ -502,7 +538,8 @@ am_libbitcoin_server_a_OBJECTS =  \
 	libbitcoin_server_a-ui_interface.$(OBJEXT) \
 	libbitcoin_server_a-validation.$(OBJEXT) \
 	libbitcoin_server_a-validationinterface.$(OBJEXT) \
-	libbitcoin_server_a-versionbits.$(OBJEXT) $(am__objects_3)
+	libbitcoin_server_a-versionbits.$(OBJEXT) $(am__objects_3) \
+	$(am__objects_4)
 libbitcoin_server_a_OBJECTS = $(am_libbitcoin_server_a_OBJECTS)
 libbitcoin_util_a_AR = $(AR) $(ARFLAGS)
 libbitcoin_util_a_LIBADD =
@@ -535,7 +572,7 @@ am__libbitcoin_util_a_SOURCES_DIST = support/lockedpool.cpp \
 	warnings.h zmq/zmqabstractnotifier.h zmq/zmqconfig.h \
 	zmq/zmqnotificationinterface.h zmq/zmqpublishnotifier.h \
 	compat/glibc_compat.cpp
-@GLIBC_BACK_COMPAT_TRUE@am__objects_4 = compat/libbitcoin_util_a-glibc_compat.$(OBJEXT)
+@GLIBC_BACK_COMPAT_TRUE@am__objects_5 = compat/libbitcoin_util_a-glibc_compat.$(OBJEXT)
 am_libbitcoin_util_a_OBJECTS =  \
 	support/libbitcoin_util_a-lockedpool.$(OBJEXT) \
 	libbitcoin_util_a-chainparamsbase.$(OBJEXT) \
@@ -552,7 +589,7 @@ am_libbitcoin_util_a_OBJECTS =  \
 	libbitcoin_util_a-utilmoneystr.$(OBJEXT) \
 	libbitcoin_util_a-utilstrencodings.$(OBJEXT) \
 	libbitcoin_util_a-utiltime.$(OBJEXT) $(am__objects_3) \
-	$(am__objects_4)
+	$(am__objects_5)
 nodist_libbitcoin_util_a_OBJECTS =
 libbitcoin_util_a_OBJECTS = $(am_libbitcoin_util_a_OBJECTS) \
 	$(nodist_libbitcoin_util_a_OBJECTS)
@@ -704,7 +741,7 @@ am__qt_libbitcoinqt_a_SOURCES_DIST = qt/bantablemodel.cpp \
 	qt/res/icons/tx_output.png qt/res/icons/tx_mined.png \
 	qt/res/icons/warning.png qt/res/icons/verify.png $(wildcard \
 	$(srcdir)/qt/res/movies/spinner-*.png)
-@ENABLE_QT_TRUE@am__objects_5 =  \
+@ENABLE_QT_TRUE@am__objects_6 =  \
 @ENABLE_QT_TRUE@	qt/libbitcoinqt_a-bantablemodel.$(OBJEXT) \
 @ENABLE_QT_TRUE@	qt/libbitcoinqt_a-bitcoinaddressvalidator.$(OBJEXT) \
 @ENABLE_QT_TRUE@	qt/libbitcoinqt_a-bitcoinamountfield.$(OBJEXT) \
@@ -727,9 +764,9 @@ am__qt_libbitcoinqt_a_SOURCES_DIST = qt/bantablemodel.cpp \
 @ENABLE_QT_TRUE@	qt/libbitcoinqt_a-splashscreen.$(OBJEXT) \
 @ENABLE_QT_TRUE@	qt/libbitcoinqt_a-trafficgraphwidget.$(OBJEXT) \
 @ENABLE_QT_TRUE@	qt/libbitcoinqt_a-utilitydialog.$(OBJEXT)
-@ENABLE_QT_TRUE@am__objects_6 = qt/libbitcoinqt_a-winshutdownmonitor.$(OBJEXT)
-@ENABLE_QT_TRUE@@TARGET_WINDOWS_TRUE@am__objects_7 = $(am__objects_6)
-@ENABLE_QT_TRUE@am__objects_8 =  \
+@ENABLE_QT_TRUE@am__objects_7 = qt/libbitcoinqt_a-winshutdownmonitor.$(OBJEXT)
+@ENABLE_QT_TRUE@@TARGET_WINDOWS_TRUE@am__objects_8 = $(am__objects_7)
+@ENABLE_QT_TRUE@am__objects_9 =  \
 @ENABLE_QT_TRUE@	qt/libbitcoinqt_a-addressbookpage.$(OBJEXT) \
 @ENABLE_QT_TRUE@	qt/libbitcoinqt_a-addresstablemodel.$(OBJEXT) \
 @ENABLE_QT_TRUE@	qt/libbitcoinqt_a-askpassphrasedialog.$(OBJEXT) \
@@ -756,16 +793,16 @@ am__qt_libbitcoinqt_a_SOURCES_DIST = qt/bantablemodel.cpp \
 @ENABLE_QT_TRUE@	qt/libbitcoinqt_a-walletmodel.$(OBJEXT) \
 @ENABLE_QT_TRUE@	qt/libbitcoinqt_a-walletmodeltransaction.$(OBJEXT) \
 @ENABLE_QT_TRUE@	qt/libbitcoinqt_a-walletview.$(OBJEXT)
-@ENABLE_QT_TRUE@@ENABLE_WALLET_TRUE@am__objects_9 = $(am__objects_8)
-@ENABLE_QT_TRUE@am__objects_10 = $(am__objects_5) $(am__objects_7) \
-@ENABLE_QT_TRUE@	$(am__objects_9)
-@ENABLE_QT_TRUE@am_qt_libbitcoinqt_a_OBJECTS = $(am__objects_10) \
+@ENABLE_QT_TRUE@@ENABLE_WALLET_TRUE@am__objects_10 = $(am__objects_9)
+@ENABLE_QT_TRUE@am__objects_11 = $(am__objects_6) $(am__objects_8) \
+@ENABLE_QT_TRUE@	$(am__objects_10)
+@ENABLE_QT_TRUE@am_qt_libbitcoinqt_a_OBJECTS = $(am__objects_11) \
 @ENABLE_QT_TRUE@	$(am__objects_3) $(am__objects_3) \
 @ENABLE_QT_TRUE@	$(am__objects_3) $(am__objects_3) \
 @ENABLE_QT_TRUE@	$(am__objects_3) $(am__objects_3) \
 @ENABLE_QT_TRUE@	$(am__objects_3) $(am__objects_3) \
 @ENABLE_QT_TRUE@	$(am__objects_3)
-@ENABLE_QT_TRUE@am__objects_11 = qt/libbitcoinqt_a-moc_addressbookpage.$(OBJEXT) \
+@ENABLE_QT_TRUE@am__objects_12 = qt/libbitcoinqt_a-moc_addressbookpage.$(OBJEXT) \
 @ENABLE_QT_TRUE@	qt/libbitcoinqt_a-moc_addresstablemodel.$(OBJEXT) \
 @ENABLE_QT_TRUE@	qt/libbitcoinqt_a-moc_askpassphrasedialog.$(OBJEXT) \
 @ENABLE_QT_TRUE@	qt/libbitcoinqt_a-moc_bantablemodel.$(OBJEXT) \
@@ -810,15 +847,15 @@ am__qt_libbitcoinqt_a_SOURCES_DIST = qt/bantablemodel.cpp \
 @ENABLE_QT_TRUE@	qt/libbitcoinqt_a-moc_walletframe.$(OBJEXT) \
 @ENABLE_QT_TRUE@	qt/libbitcoinqt_a-moc_walletmodel.$(OBJEXT) \
 @ENABLE_QT_TRUE@	qt/libbitcoinqt_a-moc_walletview.$(OBJEXT)
-@ENABLE_QT_TRUE@am__objects_12 =  \
-@ENABLE_QT_TRUE@	qt/libbitcoinqt_a-paymentrequest.pb.$(OBJEXT)
 @ENABLE_QT_TRUE@am__objects_13 =  \
+@ENABLE_QT_TRUE@	qt/libbitcoinqt_a-paymentrequest.pb.$(OBJEXT)
+@ENABLE_QT_TRUE@am__objects_14 =  \
 @ENABLE_QT_TRUE@	qt/libbitcoinqt_a-qrc_bitcoin.$(OBJEXT)
-@ENABLE_QT_TRUE@am__objects_14 = qt/libbitcoinqt_a-qrc_bitcoin_locale.$(OBJEXT)
-@ENABLE_QT_TRUE@nodist_qt_libbitcoinqt_a_OBJECTS = $(am__objects_11) \
-@ENABLE_QT_TRUE@	$(am__objects_3) $(am__objects_12) \
+@ENABLE_QT_TRUE@am__objects_15 = qt/libbitcoinqt_a-qrc_bitcoin_locale.$(OBJEXT)
+@ENABLE_QT_TRUE@nodist_qt_libbitcoinqt_a_OBJECTS = $(am__objects_12) \
 @ENABLE_QT_TRUE@	$(am__objects_3) $(am__objects_13) \
-@ENABLE_QT_TRUE@	$(am__objects_14)
+@ENABLE_QT_TRUE@	$(am__objects_3) $(am__objects_14) \
+@ENABLE_QT_TRUE@	$(am__objects_15)
 qt_libbitcoinqt_a_OBJECTS = $(am_qt_libbitcoinqt_a_OBJECTS) \
 	$(nodist_qt_libbitcoinqt_a_OBJECTS)
 am__DEPENDENCIES_1 =
@@ -840,7 +877,7 @@ am__libbitcoinconsensus_la_SOURCES_DIST = crypto/aes.cpp crypto/aes.h \
 	script/script_error.cpp script/script_error.h serialize.h \
 	tinyformat.h uint256.cpp uint256.h utilstrencodings.cpp \
 	utilstrencodings.h version.h compat/glibc_compat.cpp
-am__objects_15 = crypto/libbitcoinconsensus_la-aes.lo \
+am__objects_16 = crypto/libbitcoinconsensus_la-aes.lo \
 	crypto/libbitcoinconsensus_la-hmac_sha256.lo \
 	crypto/libbitcoinconsensus_la-hmac_sha512.lo \
 	crypto/libbitcoinconsensus_la-ripemd160.lo \
@@ -848,7 +885,7 @@ am__objects_15 = crypto/libbitcoinconsensus_la-aes.lo \
 	crypto/libbitcoinconsensus_la-sha1.lo \
 	crypto/libbitcoinconsensus_la-sha256.lo \
 	crypto/libbitcoinconsensus_la-sha512.lo
-am__objects_16 = libbitcoinconsensus_la-arith_uint256.lo \
+am__objects_17 = libbitcoinconsensus_la-arith_uint256.lo \
 	consensus/libbitcoinconsensus_la-merkle.lo \
 	libbitcoinconsensus_la-hash.lo \
 	primitives/libbitcoinconsensus_la-block.lo \
@@ -860,10 +897,10 @@ am__objects_16 = libbitcoinconsensus_la-arith_uint256.lo \
 	script/libbitcoinconsensus_la-script_error.lo \
 	libbitcoinconsensus_la-uint256.lo \
 	libbitcoinconsensus_la-utilstrencodings.lo
-@BUILD_BITCOIN_LIBS_TRUE@@GLIBC_BACK_COMPAT_TRUE@am__objects_17 = compat/libbitcoinconsensus_la-glibc_compat.lo
+@BUILD_BITCOIN_LIBS_TRUE@@GLIBC_BACK_COMPAT_TRUE@am__objects_18 = compat/libbitcoinconsensus_la-glibc_compat.lo
 @BUILD_BITCOIN_LIBS_TRUE@am_libbitcoinconsensus_la_OBJECTS =  \
-@BUILD_BITCOIN_LIBS_TRUE@	$(am__objects_15) $(am__objects_16) \
-@BUILD_BITCOIN_LIBS_TRUE@	$(am__objects_17)
+@BUILD_BITCOIN_LIBS_TRUE@	$(am__objects_16) $(am__objects_17) \
+@BUILD_BITCOIN_LIBS_TRUE@	$(am__objects_18)
 libbitcoinconsensus_la_OBJECTS = $(am_libbitcoinconsensus_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -882,7 +919,7 @@ am__bench_bench_potrero_SOURCES_DIST = bench/bench_bitcoin.cpp \
 	bench/mempool_eviction.cpp bench/verify_script.cpp \
 	bench/base58.cpp bench/lockedpool.cpp bench/perf.cpp \
 	bench/perf.h bench/coin_selection.cpp
-@ENABLE_BENCH_TRUE@@ENABLE_WALLET_TRUE@am__objects_18 = bench/bench_potrero-coin_selection.$(OBJEXT)
+@ENABLE_BENCH_TRUE@@ENABLE_WALLET_TRUE@am__objects_19 = bench/bench_potrero-coin_selection.$(OBJEXT)
 @ENABLE_BENCH_TRUE@am_bench_bench_potrero_OBJECTS = bench/bench_potrero-bench_bitcoin.$(OBJEXT) \
 @ENABLE_BENCH_TRUE@	bench/bench_potrero-bench.$(OBJEXT) \
 @ENABLE_BENCH_TRUE@	bench/bench_potrero-checkblock.$(OBJEXT) \
@@ -896,17 +933,17 @@ am__bench_bench_potrero_SOURCES_DIST = bench/bench_bitcoin.cpp \
 @ENABLE_BENCH_TRUE@	bench/bench_potrero-base58.$(OBJEXT) \
 @ENABLE_BENCH_TRUE@	bench/bench_potrero-lockedpool.$(OBJEXT) \
 @ENABLE_BENCH_TRUE@	bench/bench_potrero-perf.$(OBJEXT) \
-@ENABLE_BENCH_TRUE@	$(am__objects_18)
-@ENABLE_BENCH_FALSE@@ENABLE_TESTS_TRUE@am__objects_19 =  \
+@ENABLE_BENCH_TRUE@	$(am__objects_19)
+@ENABLE_BENCH_FALSE@@ENABLE_TESTS_TRUE@am__objects_20 =  \
 @ENABLE_BENCH_FALSE@@ENABLE_TESTS_TRUE@	$(am__objects_3) \
 @ENABLE_BENCH_FALSE@@ENABLE_TESTS_TRUE@	$(am__objects_3)
-@ENABLE_BENCH_TRUE@am__objects_19 = $(am__objects_3)
+@ENABLE_BENCH_TRUE@am__objects_20 = $(am__objects_3)
 @ENABLE_BENCH_TRUE@nodist_bench_bench_potrero_OBJECTS =  \
-@ENABLE_BENCH_TRUE@	$(am__objects_19)
+@ENABLE_BENCH_TRUE@	$(am__objects_20)
 bench_bench_potrero_OBJECTS = $(am_bench_bench_potrero_OBJECTS) \
 	$(nodist_bench_bench_potrero_OBJECTS)
-am__DEPENDENCIES_2 = $(am__append_9)
-am__DEPENDENCIES_3 = $(am__append_10)
+am__DEPENDENCIES_2 = $(am__append_11)
+am__DEPENDENCIES_3 = $(am__append_12)
 @EMBEDDED_UNIVALUE_FALSE@am__DEPENDENCIES_4 = $(am__DEPENDENCIES_1)
 @EMBEDDED_UNIVALUE_TRUE@am__DEPENDENCIES_4 = univalue/libunivalue.la
 @ENABLE_BENCH_TRUE@@ENABLE_ZMQ_TRUE@am__DEPENDENCIES_5 =  \
@@ -918,7 +955,7 @@ am__DEPENDENCIES_3 = $(am__append_10)
 @ENABLE_BENCH_TRUE@	$(LIBBITCOIN_CRYPTO) $(am__DEPENDENCIES_2) \
 @ENABLE_BENCH_TRUE@	$(am__DEPENDENCIES_3) $(LIBSECP256K1) \
 @ENABLE_BENCH_TRUE@	$(am__DEPENDENCIES_4) $(am__DEPENDENCIES_5) \
-@ENABLE_BENCH_TRUE@	$(am__append_28) $(am__DEPENDENCIES_1) \
+@ENABLE_BENCH_TRUE@	$(am__append_30) $(am__DEPENDENCIES_1) \
 @ENABLE_BENCH_TRUE@	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 @ENABLE_BENCH_TRUE@	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 @ENABLE_BENCH_TRUE@	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
@@ -927,9 +964,9 @@ bench_bench_potrero_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
 	$(bench_bench_potrero_CXXFLAGS) $(CXXFLAGS) \
 	$(bench_bench_potrero_LDFLAGS) $(LDFLAGS) -o $@
 am__potrero_cli_SOURCES_DIST = bitcoin-cli.cpp bitcoin-cli-res.rc
-@TARGET_WINDOWS_TRUE@am__objects_20 = bitcoin-cli-res.$(OBJEXT)
+@TARGET_WINDOWS_TRUE@am__objects_21 = bitcoin-cli-res.$(OBJEXT)
 am_potrero_cli_OBJECTS = potrero_cli-bitcoin-cli.$(OBJEXT) \
-	$(am__objects_20)
+	$(am__objects_21)
 potrero_cli_OBJECTS = $(am_potrero_cli_OBJECTS)
 potrero_cli_DEPENDENCIES = $(LIBBITCOIN_CLI) $(am__DEPENDENCIES_4) \
 	$(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) $(am__DEPENDENCIES_1) \
@@ -939,9 +976,9 @@ potrero_cli_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(potrero_cli_CXXFLAGS) \
 	$(CXXFLAGS) $(potrero_cli_LDFLAGS) $(LDFLAGS) -o $@
 am__potrero_tx_SOURCES_DIST = bitcoin-tx.cpp bitcoin-tx-res.rc
-@TARGET_WINDOWS_TRUE@am__objects_21 = bitcoin-tx-res.$(OBJEXT)
+@TARGET_WINDOWS_TRUE@am__objects_22 = bitcoin-tx-res.$(OBJEXT)
 am_potrero_tx_OBJECTS = potrero_tx-bitcoin-tx.$(OBJEXT) \
-	$(am__objects_21)
+	$(am__objects_22)
 potrero_tx_OBJECTS = $(am_potrero_tx_OBJECTS)
 potrero_tx_DEPENDENCIES = $(am__DEPENDENCIES_4) $(LIBBITCOIN_COMMON) \
 	$(LIBBITCOIN_UTIL) $(LIBBITCOIN_CONSENSUS) \
@@ -951,8 +988,8 @@ potrero_tx_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(potrero_tx_CXXFLAGS) \
 	$(CXXFLAGS) $(potrero_tx_LDFLAGS) $(LDFLAGS) -o $@
 am__potrerod_SOURCES_DIST = bitcoind.cpp bitcoind-res.rc
-@TARGET_WINDOWS_TRUE@am__objects_22 = bitcoind-res.$(OBJEXT)
-am_potrerod_OBJECTS = potrerod-bitcoind.$(OBJEXT) $(am__objects_22)
+@TARGET_WINDOWS_TRUE@am__objects_23 = bitcoind-res.$(OBJEXT)
+am_potrerod_OBJECTS = potrerod-bitcoind.$(OBJEXT) $(am__objects_23)
 potrerod_OBJECTS = $(am_potrerod_OBJECTS)
 potrerod_DEPENDENCIES = $(LIBBITCOIN_SERVER) $(LIBBITCOIN_COMMON) \
 	$(am__DEPENDENCIES_4) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_WALLET) \
@@ -968,23 +1005,23 @@ potrerod_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
 am__qt_potrero_qt_SOURCES_DIST = qt/bitcoin.cpp \
 	qt/macdockiconhandler.mm qt/macnotificationhandler.mm \
 	qt/res/bitcoin-qt-res.rc
-@ENABLE_QT_TRUE@am__objects_23 =  \
+@ENABLE_QT_TRUE@am__objects_24 =  \
 @ENABLE_QT_TRUE@	qt/potrero_qt-macdockiconhandler.$(OBJEXT) \
 @ENABLE_QT_TRUE@	qt/potrero_qt-macnotificationhandler.$(OBJEXT)
-@ENABLE_QT_TRUE@@TARGET_DARWIN_TRUE@am__objects_24 =  \
-@ENABLE_QT_TRUE@@TARGET_DARWIN_TRUE@	$(am__objects_23)
-@ENABLE_QT_TRUE@am__objects_25 = qt/res/bitcoin-qt-res.$(OBJEXT)
-@ENABLE_QT_TRUE@@TARGET_WINDOWS_TRUE@am__objects_26 =  \
-@ENABLE_QT_TRUE@@TARGET_WINDOWS_TRUE@	$(am__objects_25)
+@ENABLE_QT_TRUE@@TARGET_DARWIN_TRUE@am__objects_25 =  \
+@ENABLE_QT_TRUE@@TARGET_DARWIN_TRUE@	$(am__objects_24)
+@ENABLE_QT_TRUE@am__objects_26 = qt/res/bitcoin-qt-res.$(OBJEXT)
+@ENABLE_QT_TRUE@@TARGET_WINDOWS_TRUE@am__objects_27 =  \
+@ENABLE_QT_TRUE@@TARGET_WINDOWS_TRUE@	$(am__objects_26)
 @ENABLE_QT_TRUE@am_qt_potrero_qt_OBJECTS =  \
 @ENABLE_QT_TRUE@	qt/potrero_qt-bitcoin.$(OBJEXT) \
-@ENABLE_QT_TRUE@	$(am__objects_24) $(am__objects_26)
+@ENABLE_QT_TRUE@	$(am__objects_25) $(am__objects_27)
 qt_potrero_qt_OBJECTS = $(am_qt_potrero_qt_OBJECTS)
 @ENABLE_QT_TRUE@@ENABLE_ZMQ_TRUE@am__DEPENDENCIES_6 =  \
 @ENABLE_QT_TRUE@@ENABLE_ZMQ_TRUE@	$(LIBBITCOIN_ZMQ) \
 @ENABLE_QT_TRUE@@ENABLE_ZMQ_TRUE@	$(am__DEPENDENCIES_1)
 @ENABLE_QT_TRUE@qt_potrero_qt_DEPENDENCIES = qt/libbitcoinqt.a \
-@ENABLE_QT_TRUE@	$(LIBBITCOIN_SERVER) $(am__append_36) \
+@ENABLE_QT_TRUE@	$(LIBBITCOIN_SERVER) $(am__append_38) \
 @ENABLE_QT_TRUE@	$(am__DEPENDENCIES_6) $(LIBBITCOIN_CLI) \
 @ENABLE_QT_TRUE@	$(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) \
 @ENABLE_QT_TRUE@	$(LIBBITCOIN_CONSENSUS) $(LIBBITCOIN_CRYPTO) \
@@ -1006,19 +1043,19 @@ am__qt_test_test_potrero_qt_SOURCES_DIST = qt/test/compattests.cpp \
 	qt/test/rpcnestedtests.h qt/test/uritests.h \
 	qt/test/paymentrequestdata.h qt/test/paymentservertests.h \
 	qt/test/paymentservertests.cpp
-@ENABLE_QT_TESTS_TRUE@@ENABLE_WALLET_TRUE@am__objects_27 = qt/test/test_potrero_qt-paymentservertests.$(OBJEXT)
+@ENABLE_QT_TESTS_TRUE@@ENABLE_WALLET_TRUE@am__objects_28 = qt/test/test_potrero_qt-paymentservertests.$(OBJEXT)
 @ENABLE_QT_TESTS_TRUE@am_qt_test_test_potrero_qt_OBJECTS = qt/test/test_potrero_qt-compattests.$(OBJEXT) \
 @ENABLE_QT_TESTS_TRUE@	qt/test/test_potrero_qt-rpcnestedtests.$(OBJEXT) \
 @ENABLE_QT_TESTS_TRUE@	qt/test/test_potrero_qt-test_main.$(OBJEXT) \
 @ENABLE_QT_TESTS_TRUE@	qt/test/test_potrero_qt-uritests.$(OBJEXT) \
-@ENABLE_QT_TESTS_TRUE@	$(am__objects_3) $(am__objects_27)
-@ENABLE_QT_TESTS_TRUE@@ENABLE_WALLET_TRUE@am__objects_28 = qt/test/test_potrero_qt-moc_paymentservertests.$(OBJEXT)
-@ENABLE_QT_TESTS_TRUE@am__objects_29 = qt/test/test_potrero_qt-moc_compattests.$(OBJEXT) \
+@ENABLE_QT_TESTS_TRUE@	$(am__objects_3) $(am__objects_28)
+@ENABLE_QT_TESTS_TRUE@@ENABLE_WALLET_TRUE@am__objects_29 = qt/test/test_potrero_qt-moc_paymentservertests.$(OBJEXT)
+@ENABLE_QT_TESTS_TRUE@am__objects_30 = qt/test/test_potrero_qt-moc_compattests.$(OBJEXT) \
 @ENABLE_QT_TESTS_TRUE@	qt/test/test_potrero_qt-moc_rpcnestedtests.$(OBJEXT) \
 @ENABLE_QT_TESTS_TRUE@	qt/test/test_potrero_qt-moc_uritests.$(OBJEXT) \
-@ENABLE_QT_TESTS_TRUE@	$(am__objects_28)
-@ENABLE_QT_TESTS_TRUE@nodist_qt_test_test_potrero_qt_OBJECTS =  \
 @ENABLE_QT_TESTS_TRUE@	$(am__objects_29)
+@ENABLE_QT_TESTS_TRUE@nodist_qt_test_test_potrero_qt_OBJECTS =  \
+@ENABLE_QT_TESTS_TRUE@	$(am__objects_30)
 qt_test_test_potrero_qt_OBJECTS =  \
 	$(am_qt_test_test_potrero_qt_OBJECTS) \
 	$(nodist_qt_test_test_potrero_qt_OBJECTS)
@@ -1027,7 +1064,7 @@ qt_test_test_potrero_qt_OBJECTS =  \
 @ENABLE_QT_TESTS_TRUE@@ENABLE_ZMQ_TRUE@	$(am__DEPENDENCIES_1)
 @ENABLE_QT_TESTS_TRUE@qt_test_test_potrero_qt_DEPENDENCIES =  \
 @ENABLE_QT_TESTS_TRUE@	$(LIBBITCOINQT) $(LIBBITCOIN_SERVER) \
-@ENABLE_QT_TESTS_TRUE@	$(am__append_43) $(am__DEPENDENCIES_7) \
+@ENABLE_QT_TESTS_TRUE@	$(am__append_45) $(am__DEPENDENCIES_7) \
 @ENABLE_QT_TESTS_TRUE@	$(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) \
 @ENABLE_QT_TESTS_TRUE@	$(LIBBITCOIN_UTIL) \
 @ENABLE_QT_TESTS_TRUE@	$(LIBBITCOIN_CONSENSUS) \
@@ -1088,11 +1125,11 @@ am__test_test_potrero_SOURCES_DIST = test/arith_uint256_tests.cpp \
 	test/data/base58_keys_invalid.json test/data/tx_invalid.json \
 	test/data/tx_valid.json test/data/sighash.json \
 	bench/data/block413567.raw
-@ENABLE_TESTS_TRUE@@ENABLE_WALLET_TRUE@am__objects_30 = wallet/test/test_test_potrero-wallet_test_fixture.$(OBJEXT) \
+@ENABLE_TESTS_TRUE@@ENABLE_WALLET_TRUE@am__objects_31 = wallet/test/test_test_potrero-wallet_test_fixture.$(OBJEXT) \
 @ENABLE_TESTS_TRUE@@ENABLE_WALLET_TRUE@	wallet/test/test_test_potrero-accounting_tests.$(OBJEXT) \
 @ENABLE_TESTS_TRUE@@ENABLE_WALLET_TRUE@	wallet/test/test_test_potrero-wallet_tests.$(OBJEXT) \
 @ENABLE_TESTS_TRUE@@ENABLE_WALLET_TRUE@	wallet/test/test_test_potrero-crypto_tests.$(OBJEXT)
-@ENABLE_TESTS_TRUE@am__objects_31 = test/test_potrero-arith_uint256_tests.$(OBJEXT) \
+@ENABLE_TESTS_TRUE@am__objects_32 = test/test_potrero-arith_uint256_tests.$(OBJEXT) \
 @ENABLE_TESTS_TRUE@	test/test_potrero-addrman_tests.$(OBJEXT) \
 @ENABLE_TESTS_TRUE@	test/test_potrero-amount_tests.$(OBJEXT) \
 @ENABLE_TESTS_TRUE@	test/test_potrero-allocator_tests.$(OBJEXT) \
@@ -1146,11 +1183,11 @@ am__test_test_potrero_SOURCES_DIST = test/arith_uint256_tests.cpp \
 @ENABLE_TESTS_TRUE@	test/test_potrero-uint256_tests.$(OBJEXT) \
 @ENABLE_TESTS_TRUE@	test/test_potrero-univalue_tests.$(OBJEXT) \
 @ENABLE_TESTS_TRUE@	test/test_potrero-util_tests.$(OBJEXT) \
-@ENABLE_TESTS_TRUE@	$(am__objects_30)
-@ENABLE_TESTS_TRUE@am_test_test_potrero_OBJECTS = $(am__objects_31) \
+@ENABLE_TESTS_TRUE@	$(am__objects_31)
+@ENABLE_TESTS_TRUE@am_test_test_potrero_OBJECTS = $(am__objects_32) \
 @ENABLE_TESTS_TRUE@	$(am__objects_3) $(am__objects_3)
 @ENABLE_TESTS_TRUE@nodist_test_test_potrero_OBJECTS =  \
-@ENABLE_TESTS_TRUE@	$(am__objects_19)
+@ENABLE_TESTS_TRUE@	$(am__objects_20)
 test_test_potrero_OBJECTS = $(am_test_test_potrero_OBJECTS) \
 	$(nodist_test_test_potrero_OBJECTS)
 @ENABLE_TESTS_TRUE@@ENABLE_ZMQ_TRUE@am__DEPENDENCIES_8 =  \
@@ -1163,7 +1200,7 @@ test_test_potrero_OBJECTS = $(am_test_test_potrero_OBJECTS) \
 @ENABLE_TESTS_TRUE@	$(am__DEPENDENCIES_2) $(am__DEPENDENCIES_3) \
 @ENABLE_TESTS_TRUE@	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 @ENABLE_TESTS_TRUE@	$(LIBSECP256K1) $(am__DEPENDENCIES_1) \
-@ENABLE_TESTS_TRUE@	$(am__append_21) $(LIBBITCOIN_CONSENSUS) \
+@ENABLE_TESTS_TRUE@	$(am__append_23) $(LIBBITCOIN_CONSENSUS) \
 @ENABLE_TESTS_TRUE@	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 @ENABLE_TESTS_TRUE@	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 @ENABLE_TESTS_TRUE@	$(am__DEPENDENCIES_8)
@@ -1625,7 +1662,7 @@ DIST_SOURCES = $(crypto_libbitcoin_crypto_a_SOURCES) \
 	$(am__leveldb_libmemenv_a_SOURCES_DIST) \
 	$(libbitcoin_cli_a_SOURCES) $(libbitcoin_common_a_SOURCES) \
 	$(libbitcoin_consensus_a_SOURCES) \
-	$(libbitcoin_server_a_SOURCES) \
+	$(am__libbitcoin_server_a_SOURCES_DIST) \
 	$(am__libbitcoin_util_a_SOURCES_DIST) \
 	$(libbitcoin_wallet_a_SOURCES) \
 	$(am__libbitcoin_zmq_a_SOURCES_DIST) \
@@ -1932,6 +1969,8 @@ CRYPTO_CFLAGS = @CRYPTO_CFLAGS@
 CRYPTO_LIBS = @CRYPTO_LIBS@
 CSCOPE = @CSCOPE@
 CTAGS = @CTAGS@
+CUDA_HOME = @CUDA_HOME@
+CUDA_LIB_DIR = @CUDA_LIB_DIR@
 CXX = @CXX@
 CXXCPP = @CXXCPP@
 CXXDEPMODE = @CXXDEPMODE@
@@ -1976,12 +2015,12 @@ INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
 LCOV = @LCOV@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
-LEVELDB_CPPFLAGS = @LEVELDB_CPPFLAGS@ $(am__append_11)
+LEVELDB_CPPFLAGS = @LEVELDB_CPPFLAGS@ $(am__append_13)
 LEVELDB_TARGET_FLAGS = @LEVELDB_TARGET_FLAGS@
-LIBLEVELDB = @LIBLEVELDB@ $(am__append_9)
-LIBMEMENV = @LIBMEMENV@ $(am__append_10)
+LIBLEVELDB = @LIBLEVELDB@ $(am__append_11)
+LIBMEMENV = @LIBMEMENV@ $(am__append_12)
 LIBOBJS = @LIBOBJS@
-LIBS = @LIBS@
+LIBS = @LIBS@ $(am__append_1)
 LIBTOOL = @LIBTOOL@
 LIBTOOL_APP_LDFLAGS = @LIBTOOL_APP_LDFLAGS@
 LIPO = @LIPO@
@@ -2001,6 +2040,7 @@ MOC = @MOC@
 MOC_DEFS = @MOC_DEFS@
 NM = @NM@
 NMEDIT = @NMEDIT@
+NVCC = @NVCC@
 OBJCOPY = @OBJCOPY@
 OBJCXX = @OBJCXX@
 OBJCXXDEPMODE = @OBJCXXDEPMODE@
@@ -2073,6 +2113,7 @@ USE_UPNP = @USE_UPNP@
 VERSION = @VERSION@
 WINDOWS_BITS = @WINDOWS_BITS@
 WINDRES = @WINDRES@
+WITH_CUDA_LIB_DIR = @WITH_CUDA_LIB_DIR@
 X11XCB_CFLAGS = @X11XCB_CFLAGS@
 X11XCB_LIBS = @X11XCB_LIBS@
 XGETTEXT = @XGETTEXT@
@@ -2145,13 +2186,16 @@ AM_CPPFLAGS = $(HARDENED_CPPFLAGS)
 EXTRA_LIBRARIES = $(LIBBITCOIN_CRYPTO) $(LIBBITCOIN_UTIL) \
 	$(LIBBITCOIN_COMMON) $(LIBBITCOIN_CONSENSUS) \
 	$(LIBBITCOIN_SERVER) $(LIBBITCOIN_CLI) $(LIBBITCOIN_WALLET) \
-	$(LIBBITCOIN_ZMQ) $(am__append_8) $(am__append_31)
+	$(LIBBITCOIN_ZMQ) $(am__append_10) $(am__append_33)
 @EMBEDDED_UNIVALUE_FALSE@LIBUNIVALUE = $(UNIVALUE_LIBS)
 @EMBEDDED_UNIVALUE_TRUE@LIBUNIVALUE = univalue/libunivalue.la
 BITCOIN_CONFIG_INCLUDES = -I$(builddir)/config
 BITCOIN_INCLUDES = -I$(builddir) -I$(builddir)/obj $(BDB_CPPFLAGS) \
 	$(BOOST_CPPFLAGS) $(LEVELDB_CPPFLAGS) $(CRYPTO_CFLAGS) \
 	$(SSL_CFLAGS) -I$(srcdir)/secp256k1/include $(UNIVALUE_CFLAGS)
+NVCC_INCLUDES = $(filter-out -pthread,$(BITCOIN_INCLUDES))
+@USE_CUDA_TRUE@NVCCFLAGS = $(AM_CPPFLAGS) $(NVCC_INCLUDES) -DHAVE_CUDA=1 -I$(CUDA_HOME)/include -Xcompiler -fPIC
+@USE_CUDA_TRUE@CUDA_RUNTIME_LIBS = -L$(CUDA_LIB_DIR) -lcudart
 LIBBITCOIN_SERVER = libbitcoin_server.a
 LIBBITCOIN_COMMON = libbitcoin_common.a
 LIBBITCOIN_CONSENSUS = libbitcoin_consensus.a
@@ -2259,44 +2303,17 @@ BITCOIN_CORE_H = \
 # server: shared between bitcoind and bitcoin-qt
 libbitcoin_server_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
 libbitcoin_server_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libbitcoin_server_a_SOURCES = \
-  addrman.cpp \
-  addrdb.cpp \
-  bloom.cpp \
-  blockencodings.cpp \
-  chain.cpp \
-  checkpoints.cpp \
-  httprpc.cpp \
-  httpserver.cpp \
-  init.cpp \
-  dbwrapper.cpp \
-  merkleblock.cpp \
-  miner.cpp \
-  net.cpp \
-  net_processing.cpp \
-  noui.cpp \
-  policy/fees.cpp \
-  policy/policy.cpp \
-  pow.cpp \
-  rest.cpp \
-  rpc/blockchain.cpp \
-  rpc/mining.cpp \
-  rpc/misc.cpp \
-  rpc/net.cpp \
-  rpc/rawtransaction.cpp \
-  rpc/server.cpp \
-  script/sigcache.cpp \
-  script/ismine.cpp \
-  timedata.cpp \
-  torcontrol.cpp \
-  txdb.cpp \
-  txmempool.cpp \
-  ui_interface.cpp \
-  validation.cpp \
-  validationinterface.cpp \
-  versionbits.cpp \
-  $(BITCOIN_CORE_H)
-
+libbitcoin_server_a_LIBADD = 
+libbitcoin_server_a_SOURCES = addrman.cpp addrdb.cpp bloom.cpp \
+	blockencodings.cpp chain.cpp checkpoints.cpp httprpc.cpp \
+	httpserver.cpp init.cpp dbwrapper.cpp merkleblock.cpp \
+	miner.cpp net.cpp net_processing.cpp noui.cpp policy/fees.cpp \
+	policy/policy.cpp pow.cpp rest.cpp rpc/blockchain.cpp \
+	rpc/mining.cpp rpc/misc.cpp rpc/net.cpp rpc/rawtransaction.cpp \
+	rpc/server.cpp script/sigcache.cpp script/ismine.cpp \
+	timedata.cpp torcontrol.cpp txdb.cpp txmempool.cpp \
+	ui_interface.cpp validation.cpp validationinterface.cpp \
+	versionbits.cpp $(BITCOIN_CORE_H) $(am__append_4)
 @ENABLE_ZMQ_TRUE@libbitcoin_zmq_a_CPPFLAGS = $(BITCOIN_INCLUDES) $(ZMQ_CFLAGS)
 @ENABLE_ZMQ_TRUE@libbitcoin_zmq_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 @ENABLE_ZMQ_TRUE@libbitcoin_zmq_a_SOURCES = \
@@ -2413,7 +2430,7 @@ libbitcoin_util_a_SOURCES = support/lockedpool.cpp chainparamsbase.cpp \
 	rpc/protocol.cpp support/cleanse.cpp sync.cpp \
 	threadinterrupt.cpp util.cpp utilmoneystr.cpp \
 	utilstrencodings.cpp utiltime.cpp $(BITCOIN_CORE_H) \
-	$(am__append_3)
+	$(am__append_5)
 
 # cli: shared between bitcoin-cli and bitcoin-qt
 libbitcoin_cli_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
@@ -2426,7 +2443,7 @@ nodist_libbitcoin_util_a_SOURCES = $(srcdir)/obj/build.h
 #
 
 # bitcoind binary #
-potrerod_SOURCES = bitcoind.cpp $(am__append_4)
+potrerod_SOURCES = bitcoind.cpp $(am__append_6)
 potrerod_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
 potrerod_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 potrerod_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
@@ -2438,7 +2455,7 @@ potrerod_LDADD = $(LIBBITCOIN_SERVER) $(LIBBITCOIN_COMMON) \
 	$(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
 
 # bitcoin-cli binary #
-potrero_cli_SOURCES = bitcoin-cli.cpp $(am__append_5)
+potrero_cli_SOURCES = bitcoin-cli.cpp $(am__append_7)
 potrero_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
 potrero_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 potrero_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
@@ -2448,7 +2465,7 @@ potrero_cli_LDADD = $(LIBBITCOIN_CLI) $(LIBUNIVALUE) \
 #
 
 # bitcoin-tx binary #
-potrero_tx_SOURCES = bitcoin-tx.cpp $(am__append_6)
+potrero_tx_SOURCES = bitcoin-tx.cpp $(am__append_8)
 potrero_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
 potrero_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 potrero_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
@@ -2462,7 +2479,7 @@ potrero_tx_LDADD = $(LIBUNIVALUE) $(LIBBITCOIN_COMMON) \
 @BUILD_BITCOIN_LIBS_TRUE@include_HEADERS = script/bitcoinconsensus.h
 @BUILD_BITCOIN_LIBS_TRUE@libbitcoinconsensus_la_SOURCES = $(crypto_libbitcoin_crypto_a_SOURCES) \
 @BUILD_BITCOIN_LIBS_TRUE@	$(libbitcoin_consensus_a_SOURCES) \
-@BUILD_BITCOIN_LIBS_TRUE@	$(am__append_7)
+@BUILD_BITCOIN_LIBS_TRUE@	$(am__append_9)
 @BUILD_BITCOIN_LIBS_TRUE@libbitcoinconsensus_la_LDFLAGS = $(AM_LDFLAGS) -no-undefined $(RELDFLAGS)
 @BUILD_BITCOIN_LIBS_TRUE@libbitcoinconsensus_la_LIBADD = $(LIBSECP256K1) $(CRYPTO_LIBS)
 @BUILD_BITCOIN_LIBS_TRUE@libbitcoinconsensus_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(builddir)/obj -I$(srcdir)/secp256k1/include -DBUILD_BITCOIN_INTERNAL $(SSL_CFLAGS)
@@ -2478,17 +2495,17 @@ CLEANFILES = $(EXTRA_LIBRARIES) *.gcda *.gcno compat/*.gcda \
 	primitives/*.gcno script/*.gcda script/*.gcno support/*.gcda \
 	support/*.gcno univalue/*.gcda univalue/*.gcno wallet/*.gcda \
 	wallet/*.gcno wallet/test/*.gcda wallet/test/*.gcno zmq/*.gcda \
-	zmq/*.gcno $(am__append_23) $(am__append_29) $(am__append_38) \
-	$(am__append_45)
-DISTCLEANFILES = obj/build.h $(am__append_24)
-EXTRA_DIST = $(CTAES_DIST) $(am__append_19)
+	zmq/*.gcno $(am__append_25) $(am__append_31) $(am__append_40) \
+	$(am__append_47)
+DISTCLEANFILES = obj/build.h $(am__append_26)
+EXTRA_DIST = $(CTAES_DIST) $(am__append_21)
 @EMBEDDED_LEVELDB_TRUE@LIBLEVELDB_INT = leveldb/libleveldb.a
 @EMBEDDED_LEVELDB_TRUE@LIBMEMENV_INT = leveldb/libmemenv.a
 @EMBEDDED_LEVELDB_TRUE@LEVELDB_CPPFLAGS_INT = -I$(srcdir)/leveldb \
 @EMBEDDED_LEVELDB_TRUE@	$(LEVELDB_TARGET_FLAGS) \
 @EMBEDDED_LEVELDB_TRUE@	-DLEVELDB_ATOMIC_PRESENT \
-@EMBEDDED_LEVELDB_TRUE@	-D__STDC_LIMIT_MACROS $(am__append_12) \
-@EMBEDDED_LEVELDB_TRUE@	$(am__append_13)
+@EMBEDDED_LEVELDB_TRUE@	-D__STDC_LIMIT_MACROS $(am__append_14) \
+@EMBEDDED_LEVELDB_TRUE@	$(am__append_15)
 @EMBEDDED_LEVELDB_TRUE@leveldb_libleveldb_a_CPPFLAGS = $(AM_CPPFLAGS) $(LEVELDB_CPPFLAGS_INT) $(LEVELDB_CPPFLAGS)
 @EMBEDDED_LEVELDB_TRUE@leveldb_libleveldb_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 @EMBEDDED_LEVELDB_TRUE@leveldb_libleveldb_a_SOURCES =  \
@@ -2582,8 +2599,8 @@ EXTRA_DIST = $(CTAES_DIST) $(am__append_19)
 @EMBEDDED_LEVELDB_TRUE@	leveldb/util/histogram.cc \
 @EMBEDDED_LEVELDB_TRUE@	leveldb/util/logging.cc \
 @EMBEDDED_LEVELDB_TRUE@	leveldb/util/options.cc \
-@EMBEDDED_LEVELDB_TRUE@	leveldb/util/status.cc $(am__append_14) \
-@EMBEDDED_LEVELDB_TRUE@	$(am__append_15)
+@EMBEDDED_LEVELDB_TRUE@	leveldb/util/status.cc $(am__append_16) \
+@EMBEDDED_LEVELDB_TRUE@	$(am__append_17)
 @EMBEDDED_LEVELDB_TRUE@leveldb_libmemenv_a_CPPFLAGS = $(leveldb_libleveldb_a_CPPFLAGS)
 @EMBEDDED_LEVELDB_TRUE@leveldb_libmemenv_a_CXXFLAGS = $(leveldb_libleveldb_a_CXXFLAGS)
 @EMBEDDED_LEVELDB_TRUE@leveldb_libmemenv_a_SOURCES =  \
@@ -2650,7 +2667,7 @@ EXTRA_DIST = $(CTAES_DIST) $(am__append_19)
 @ENABLE_TESTS_TRUE@	test/versionbits_tests.cpp \
 @ENABLE_TESTS_TRUE@	test/uint256_tests.cpp \
 @ENABLE_TESTS_TRUE@	test/univalue_tests.cpp test/util_tests.cpp \
-@ENABLE_TESTS_TRUE@	$(am__append_20)
+@ENABLE_TESTS_TRUE@	$(am__append_22)
 @ENABLE_TESTS_TRUE@test_test_potrero_SOURCES = $(BITCOIN_TESTS) $(JSON_TEST_FILES) $(RAW_TEST_FILES)
 @ENABLE_TESTS_TRUE@test_test_potrero_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) -I$(builddir)/test/ $(TESTDEFS) $(EVENT_CFLAGS)
 @ENABLE_TESTS_TRUE@test_test_potrero_LDADD = $(LIBBITCOIN_SERVER) \
@@ -2660,9 +2677,9 @@ EXTRA_DIST = $(CTAES_DIST) $(am__append_19)
 @ENABLE_TESTS_TRUE@	$(LIBLEVELDB) $(LIBMEMENV) $(BOOST_LIBS) \
 @ENABLE_TESTS_TRUE@	$(BOOST_UNIT_TEST_FRAMEWORK_LIB) \
 @ENABLE_TESTS_TRUE@	$(LIBSECP256K1) $(EVENT_LIBS) \
-@ENABLE_TESTS_TRUE@	$(am__append_21) $(LIBBITCOIN_CONSENSUS) \
+@ENABLE_TESTS_TRUE@	$(am__append_23) $(LIBBITCOIN_CONSENSUS) \
 @ENABLE_TESTS_TRUE@	$(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) \
-@ENABLE_TESTS_TRUE@	$(MINIUPNPC_LIBS) $(am__append_22)
+@ENABLE_TESTS_TRUE@	$(MINIUPNPC_LIBS) $(am__append_24)
 @ENABLE_TESTS_TRUE@test_test_potrero_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 @ENABLE_TESTS_TRUE@test_test_potrero_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) -static
 #
@@ -2692,7 +2709,7 @@ EXTRA_DIST = $(CTAES_DIST) $(am__append_19)
 @ENABLE_BENCH_TRUE@	bench/mempool_eviction.cpp \
 @ENABLE_BENCH_TRUE@	bench/verify_script.cpp bench/base58.cpp \
 @ENABLE_BENCH_TRUE@	bench/lockedpool.cpp bench/perf.cpp \
-@ENABLE_BENCH_TRUE@	bench/perf.h $(am__append_27)
+@ENABLE_BENCH_TRUE@	bench/perf.h $(am__append_29)
 @ENABLE_BENCH_TRUE@nodist_bench_bench_potrero_SOURCES = $(GENERATED_TEST_FILES)
 @ENABLE_BENCH_TRUE@bench_bench_potrero_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CLFAGS) $(EVENT_PTHREADS_CFLAGS) -I$(builddir)/bench/
 @ENABLE_BENCH_TRUE@bench_bench_potrero_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
@@ -2701,7 +2718,7 @@ EXTRA_DIST = $(CTAES_DIST) $(am__append_19)
 @ENABLE_BENCH_TRUE@	$(LIBBITCOIN_CONSENSUS) \
 @ENABLE_BENCH_TRUE@	$(LIBBITCOIN_CRYPTO) $(LIBLEVELDB) \
 @ENABLE_BENCH_TRUE@	$(LIBMEMENV) $(LIBSECP256K1) $(LIBUNIVALUE) \
-@ENABLE_BENCH_TRUE@	$(am__append_26) $(am__append_28) \
+@ENABLE_BENCH_TRUE@	$(am__append_28) $(am__append_30) \
 @ENABLE_BENCH_TRUE@	$(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) \
 @ENABLE_BENCH_TRUE@	$(CRYPTO_LIBS) $(MINIUPNPC_LIBS) \
 @ENABLE_BENCH_TRUE@	$(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
@@ -3046,7 +3063,7 @@ EXTRA_DIST = $(CTAES_DIST) $(am__append_19)
 @ENABLE_QT_TRUE@  qt/walletview.cpp
 
 @ENABLE_QT_TRUE@BITCOIN_QT_CPP = $(BITCOIN_QT_BASE_CPP) \
-@ENABLE_QT_TRUE@	$(am__append_32) $(am__append_33)
+@ENABLE_QT_TRUE@	$(am__append_34) $(am__append_35)
 @ENABLE_QT_TRUE@RES_IMAGES = 
 @ENABLE_QT_TRUE@RES_MOVIES = $(wildcard $(srcdir)/qt/res/movies/spinner-*.png)
 @ENABLE_QT_TRUE@BITCOIN_RC = qt/res/bitcoin-qt-res.rc
@@ -3073,10 +3090,10 @@ EXTRA_DIST = $(CTAES_DIST) $(am__append_19)
 
 @ENABLE_QT_TRUE@qt_potrero_qt_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
 @ENABLE_QT_TRUE@qt_potrero_qt_SOURCES = qt/bitcoin.cpp \
-@ENABLE_QT_TRUE@	$(am__append_34) $(am__append_35)
+@ENABLE_QT_TRUE@	$(am__append_36) $(am__append_37)
 @ENABLE_QT_TRUE@qt_potrero_qt_LDADD = qt/libbitcoinqt.a \
-@ENABLE_QT_TRUE@	$(LIBBITCOIN_SERVER) $(am__append_36) \
-@ENABLE_QT_TRUE@	$(am__append_37) $(LIBBITCOIN_CLI) \
+@ENABLE_QT_TRUE@	$(LIBBITCOIN_SERVER) $(am__append_38) \
+@ENABLE_QT_TRUE@	$(am__append_39) $(LIBBITCOIN_CLI) \
 @ENABLE_QT_TRUE@	$(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) \
 @ENABLE_QT_TRUE@	$(LIBBITCOIN_CONSENSUS) $(LIBBITCOIN_CRYPTO) \
 @ENABLE_QT_TRUE@	$(LIBUNIVALUE) $(LIBLEVELDB) $(LIBMEMENV) \
@@ -3094,7 +3111,7 @@ EXTRA_DIST = $(CTAES_DIST) $(am__append_19)
 @ENABLE_QT_TESTS_TRUE@TEST_QT_MOC_CPP = qt/test/moc_compattests.cpp \
 @ENABLE_QT_TESTS_TRUE@	qt/test/moc_rpcnestedtests.cpp \
 @ENABLE_QT_TESTS_TRUE@	qt/test/moc_uritests.cpp \
-@ENABLE_QT_TESTS_TRUE@	$(am__append_41)
+@ENABLE_QT_TESTS_TRUE@	$(am__append_43)
 @ENABLE_QT_TESTS_TRUE@TEST_QT_H = \
 @ENABLE_QT_TESTS_TRUE@  qt/test/compattests.h \
 @ENABLE_QT_TESTS_TRUE@  qt/test/rpcnestedtests.h \
@@ -3110,11 +3127,11 @@ EXTRA_DIST = $(CTAES_DIST) $(am__append_19)
 @ENABLE_QT_TESTS_TRUE@	qt/test/rpcnestedtests.cpp \
 @ENABLE_QT_TESTS_TRUE@	qt/test/test_main.cpp \
 @ENABLE_QT_TESTS_TRUE@	qt/test/uritests.cpp $(TEST_QT_H) \
-@ENABLE_QT_TESTS_TRUE@	$(am__append_42)
+@ENABLE_QT_TESTS_TRUE@	$(am__append_44)
 @ENABLE_QT_TESTS_TRUE@nodist_qt_test_test_potrero_qt_SOURCES = $(TEST_QT_MOC_CPP)
 @ENABLE_QT_TESTS_TRUE@qt_test_test_potrero_qt_LDADD = $(LIBBITCOINQT) \
-@ENABLE_QT_TESTS_TRUE@	$(LIBBITCOIN_SERVER) $(am__append_43) \
-@ENABLE_QT_TESTS_TRUE@	$(am__append_44) $(LIBBITCOIN_CLI) \
+@ENABLE_QT_TESTS_TRUE@	$(LIBBITCOIN_SERVER) $(am__append_45) \
+@ENABLE_QT_TESTS_TRUE@	$(am__append_46) $(LIBBITCOIN_CLI) \
 @ENABLE_QT_TESTS_TRUE@	$(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) \
 @ENABLE_QT_TESTS_TRUE@	$(LIBBITCOIN_CONSENSUS) \
 @ENABLE_QT_TESTS_TRUE@	$(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) \
@@ -3130,7 +3147,7 @@ EXTRA_DIST = $(CTAES_DIST) $(am__append_19)
 all: all-recursive
 
 .SUFFIXES:
-.SUFFIXES: .cc .cpp .lo .log .mm .o .obj .rc .test .test$(EXEEXT) .trs
+.SUFFIXES: .cc .cpp .cu .lo .log .mm .o .obj .rc .test .test$(EXEEXT) .trs
 $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(srcdir)/Makefile.leveldb.include $(srcdir)/Makefile.test.include $(srcdir)/Makefile.bench.include $(srcdir)/Makefile.qt.include $(srcdir)/Makefile.qttest.include $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -10487,6 +10504,9 @@ obj/build.h: FORCE
 	@$(top_srcdir)/share/genbuild.sh $(abs_top_builddir)/src/obj/build.h \
 	  $(abs_top_srcdir)
 libbitcoin_util_a-clientversion.$(OBJEXT): obj/build.h
+
+@USE_CUDA_TRUE@.cu.o:
+@USE_CUDA_TRUE@	$(NVCC) $(NVCCFLAGS) -c $< -o $@
 
 config/bitcoin-config.h: config/stamp-h1
 	@$(MAKE) -C $(top_builddir) $(subdir)/$(@)

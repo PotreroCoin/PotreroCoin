@@ -36,6 +36,7 @@ static const CRPCConvertParam vRPCConvertParams[] =
     { "generate", 1, "maxtries" },
     { "generatetoaddress", 0, "nblocks" },
     { "generatetoaddress", 2, "maxtries" },
+    { "generatetoaddress", 3, "maxtries" },
     { "getnetworkhashps", 0, "nblocks" },
     { "getnetworkhashps", 1, "height" },
     { "sendtoaddress", 1, "amount" },
@@ -181,8 +182,13 @@ UniValue RPCConvertValues(const std::string &strMethod, const std::vector<std::s
 
     for (unsigned int idx = 0; idx < strParams.size(); idx++) {
         const std::string& strVal = strParams[idx];
+        bool convert = rpcCvtTable.convert(strMethod, idx);
+        if (convert && strMethod == "generatetoaddress" && idx == 2 &&
+                boost::algorithm::to_lower_copy(strVal) == "gpu") {
+            convert = false;
+        }
 
-        if (!rpcCvtTable.convert(strMethod, idx)) {
+        if (!convert) {
             // insert string value directly
             params.push_back(strVal);
         } else {

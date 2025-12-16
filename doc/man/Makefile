@@ -220,6 +220,8 @@ CRYPTO_CFLAGS =
 CRYPTO_LIBS = -lcrypto 
 CSCOPE = cscope
 CTAGS = ctags
+CUDA_HOME = /lib
+CUDA_LIB_DIR = /lib/x86_64-linux-gnu
 CXX = g++ -std=c++11
 CXXCPP = g++ -std=c++11 -E
 CXXDEPMODE = depmode=gcc3
@@ -289,6 +291,7 @@ MOC = /usr/lib/x86_64-linux-gnu/qt5/bin/moc
 MOC_DEFS = -DHAVE_CONFIG_H -I$(srcdir)
 NM = /usr/bin/nm -B
 NMEDIT = 
+NVCC = nvcc
 OBJCOPY = /usr/bin/objcopy
 OBJCXX = g++ -std=c++11
 OBJCXXDEPMODE = depmode=gcc3
@@ -361,6 +364,7 @@ USE_UPNP =
 VERSION = 0.14.2
 WINDOWS_BITS = 
 WINDRES = 
+WITH_CUDA_LIB_DIR = 
 X11XCB_CFLAGS = 
 X11XCB_LIBS = 
 XGETTEXT = /usr/bin/xgettext

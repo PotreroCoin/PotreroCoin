@@ -24,6 +24,18 @@ BITCOIN_INCLUDES=-I$(builddir) -I$(builddir)/obj $(BDB_CPPFLAGS) $(BOOST_CPPFLAG
 BITCOIN_INCLUDES += -I$(srcdir)/secp256k1/include
 BITCOIN_INCLUDES += $(UNIVALUE_CFLAGS)
 
+NVCC_INCLUDES = $(filter-out -pthread,$(BITCOIN_INCLUDES))
+
+NVCC = @NVCC@
+CUDA_HOME = @CUDA_HOME@
+CUDA_LIB_DIR = @CUDA_LIB_DIR@
+
+if USE_CUDA
+NVCCFLAGS = $(AM_CPPFLAGS) $(NVCC_INCLUDES) -DHAVE_CUDA=1 -I$(CUDA_HOME)/include -Xcompiler -fPIC
+CUDA_RUNTIME_LIBS = -L$(CUDA_LIB_DIR) -lcudart
+LIBS += $(CUDA_RUNTIME_LIBS)
+endif
+
 LIBBITCOIN_SERVER=libbitcoin_server.a
 LIBBITCOIN_COMMON=libbitcoin_common.a
 LIBBITCOIN_CONSENSUS=libbitcoin_consensus.a
@@ -174,6 +186,7 @@ libbitcoin_util_a-clientversion.$(OBJEXT): obj/build.h
 # server: shared between bitcoind and bitcoin-qt
 libbitcoin_server_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
 libbitcoin_server_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libbitcoin_server_a_LIBADD =
 libbitcoin_server_a_SOURCES = \
   addrman.cpp \
   addrdb.cpp \
@@ -212,6 +225,10 @@ libbitcoin_server_a_SOURCES = \
   versionbits.cpp \
   $(BITCOIN_CORE_H)
 
+if USE_CUDA
+libbitcoin_server_a_SOURCES += gpu_miner.cu
+endif
+
 if ENABLE_ZMQ
 libbitcoin_zmq_a_CPPFLAGS = $(BITCOIN_INCLUDES) $(ZMQ_CFLAGS)
 libbitcoin_zmq_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
@@ -219,6 +236,12 @@ libbitcoin_zmq_a_SOURCES = \
   zmq/zmqabstractnotifier.cpp \
   zmq/zmqnotificationinterface.cpp \
   zmq/zmqpublishnotifier.cpp
+endif
+
+
+if USE_CUDA
+.cu.o:
+	$(NVCC) $(NVCCFLAGS) -c $< -o $@
 endif
 
 

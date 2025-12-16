@@ -199,6 +199,93 @@ AC_ARG_ENABLE([werror],
     [enable_werror=$enableval],
     [enable_werror=no])
 
+AC_ARG_ENABLE([cuda],
+    [AS_HELP_STRING([--enable-cuda],
+                    [enable CUDA GPU mining support (default=auto detect)])],
+    [enable_cuda=$enableval],
+    [enable_cuda=auto])
+
+AC_ARG_WITH([cuda-lib-dir],
+    [AS_HELP_STRING([--with-cuda-lib-dir=DIR],
+                    [explicit CUDA library directory and override detection])],
+    [with_cuda_lib_dir=$withval],
+    [with_cuda_lib_dir=])
+
+cuda_auto=no
+if test "x$enable_cuda" = "xauto"; then
+  cuda_auto=yes
+  enable_cuda=yes
+fi
+
+NVCC=""
+if test "x$enable_cuda" != "xno"; then
+  AC_CHECK_PROGS([NVCC], [nvcc], [])
+  if test -z "$NVCC"; then
+    for candidate in \
+      /usr/local/cuda/bin/nvcc \
+      /usr/bin/nvcc \
+      /opt/cuda/bin/nvcc \
+      /usr/local/bin/nvcc
+    do
+      if test -x "$candidate"; then
+        NVCC="$candidate"
+        break
+      fi
+    done
+  fi
+  if test -z "$NVCC"; then
+    if test "x$cuda_auto" = "xyes"; then
+      enable_cuda=no
+    else
+      AC_MSG_ERROR([--enable-cuda requires nvcc but it was not found])
+    fi
+  fi
+fi
+
+if test "x$enable_cuda" = "xyes"; then
+  cuda_bin_dir=`dirname "$NVCC"`
+  if test "x$with_cuda_lib_dir" != "x"; then
+    CUDA_LIB_DIR="$with_cuda_lib_dir"
+  else
+    for candidate in "$cuda_bin_dir/../lib64" "$cuda_bin_dir/../lib" "$cuda_bin_dir/lib64" "$cuda_bin_dir/lib"; do
+      if test -d "$candidate"; then
+        if ls "$candidate"/libcudart.so* >/dev/null 2>&1; then
+          CUDA_LIB_DIR="$candidate"
+          break
+        fi
+      fi
+    done
+    if test -z "$CUDA_LIB_DIR" && command -v ldconfig >/dev/null 2>&1; then
+      cuda_lib_path=`ldconfig -p | awk '/libcudart\\.so/ {print $NF; exit}'`
+      if test -n "$cuda_lib_path"; then
+        CUDA_LIB_DIR=`dirname "$cuda_lib_path"`
+      fi
+    fi
+    if test -z "$CUDA_LIB_DIR"; then
+      CUDA_LIB_DIR="$cuda_bin_dir/../lib64"
+    fi
+  fi
+  if test ! -d "$CUDA_LIB_DIR"; then
+    AC_MSG_ERROR([CUDA library directory $CUDA_LIB_DIR not found])
+  fi
+  CUDA_HOME=`cd "$CUDA_LIB_DIR/.." && pwd`
+  if test ! -d "$CUDA_HOME/include"; then
+    AC_MSG_WARN([CUDA include directory $CUDA_HOME/include not found; compilation may fail])
+  fi
+  AC_DEFINE([HAVE_CUDA], [1], [Define if CUDA GPU mining support is enabled])
+  AC_MSG_NOTICE([CUDA support enabled: nvcc=$NVCC, CUDA_LIB_DIR=$CUDA_LIB_DIR])
+else
+  CUDA_HOME=""
+  CUDA_LIB_DIR="$with_cuda_lib_dir"
+  AC_MSG_NOTICE([CUDA support disabled: nvcc not found])
+fi
+
+AC_SUBST([NVCC])
+AC_SUBST([CUDA_HOME])
+AC_SUBST([CUDA_LIB_DIR])
+AC_SUBST([WITH_CUDA_LIB_DIR])
+AM_CONDITIONAL(USE_CUDA, test "x$enable_cuda" = "xyes")
+
 AC_LANG_PUSH([C++])
 AX_CHECK_COMPILE_FLAG([-Werror],[CXXFLAG_WERROR="-Werror"],[CXXFLAG_WERROR=""])
 
@@ -1179,6 +1266,15 @@ case ${OS} in
    ;;
 esac
 
+NVCC_STATUS="not found"
+if test -n "$NVCC"; then
+    NVCC_STATUS="$NVCC"
+fi
+CUDA_STATUS="disabled"
+if test "x$enable_cuda" = "xyes"; then
+    CUDA_STATUS="enabled (libdir=$CUDA_LIB_DIR)"
+fi
+
 echo 
 echo "Options used to compile and link:"
 echo "  with wallet   = $enable_wallet"
@@ -1203,4 +1299,6 @@ echo "  CPPFLAGS      = $CPPFLAGS"
 echo "  CXX           = $CXX"
 echo "  CXXFLAGS      = $CXXFLAGS"
 echo "  LDFLAGS       = $LDFLAGS"
+echo "  nvcc          = $NVCC_STATUS"
+echo "  cuda support  = $CUDA_STATUS"
 echo 

@@ -4,6 +4,16 @@ At this time, Potreros can be efficiently mined with GPU or even CPU mining mach
 
 Note: as of 5/28/23 CPU mining is probably out of question.
 
+## Solo mining via CLI
+
+For quick solo mining runs you can also use `potrero-cli`/`bitcoin-cli`:
+
+```
+bitcoin-cli generatetoaddress <count> <address> [gpu] [maxtries]
+```
+
+Add the literal `gpu` after the payout address to request the GPU mining path (defaults to a CPU fallback), and optionally follow it with a numeric `maxtries` to limit how many hashing rounds are attempted (default 1000000).
+
 ## How to mine Potreros?
 
 1. Obtain suitable hardware and software.
