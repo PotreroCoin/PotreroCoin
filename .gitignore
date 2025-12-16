@@ -1,0 +1,24 @@
+# ===============================
+# Autotools (generated files)
+# ===============================
+configure
+configure~
+config.log
+config.status
+config.cache
+
+Makefile
+Makefile.in
+aclocal.m4
+autom4te.cache/
+compile
+missing
+install-sh
+depcomp
+libtool
+ltmain.sh
+
+# Libtool outputs
+*.la
+*.lo
+.libs/
