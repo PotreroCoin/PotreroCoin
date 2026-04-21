@@ -1,0 +1,73 @@
+# Local Berkeley DB build/install
+/db4/
+/db-4.8.30.NC.tar.gz
+
+# Autotools / configure
+/autom4te.cache/
+/config.log
+/config.status
+/configure~
+/libtool
+/Makefile
+/src/Makefile
+/doc/man/Makefile
+/contrib/devtools/split-debug.sh
+/test/Makefile
+
+# Generic build metadata
+*.dirstamp
+*.gcno
+*.gcda
+*.gcov
+*.log
+*.status
+*.trs
+
+# Compiled objects / libraries
+*.o
+*.obj
+*.lo
+*.lai
+*.la
+*.a
+*.so
+*.so.*
+
+# Libtool / automake output directories
+.deps/
+.libs/
+
+# Core binaries
+/src/potrerod
+/src/potrero-cli
+/src/potrero-tx
+/src/bench/bench_potrero
+/src/test/test_potrero
+/src/test/test_potrero_fuzzy
+/src/qt/potrero-qt
+/src/qt/test/test_potrero-qt
+
+# Generated headers / sources
+/src/ui_interface.h
+/src/qt/moc_*.cpp
+/src/qt/test/moc_*.cpp
+/src/qt/qrc_*.cpp
+/src/qt/forms/ui_*.h
+/src/qt/bitcoin.moc
+/src/qt/bitcoinamountfield.moc
+/src/qt/intro.moc
+/src/qt/overviewpage.moc
+/src/qt/rpcconsole.moc
+
+# Generated Qt resources / translations
+/src/qt/locale/*.qm
+
+# Generated protobuf code
+/src/qt/paymentrequest.pb.cc
+/src/qt/paymentrequest.pb.h
+
+# Editor / OS noise
+*~
+*.swp
+*.swo
+.DS_Store
