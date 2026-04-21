@@ -5,6 +5,7 @@
 #include "cuckoocache.h"
 #include "test/test_bitcoin.h"
 #include "random.h"
+#include <deque>
 #include <thread>
 #include <boost/thread.hpp>
 

@@ -3,8 +3,8 @@
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-SRCDIR="/data/git/potrero/PotreroCoin"
-BUILDDIR="/data/git/potrero/PotreroCoin"
+SRCDIR="/home/cris/git/PotreroCoin"
+BUILDDIR="/home/cris/git/PotreroCoin"
 EXEEXT=""
 
 # These will turn into comments if they were disabled when configuring.

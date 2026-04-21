@@ -5,8 +5,9 @@
 #include "trafficgraphwidget.h"
 #include "clientmodel.h"
 
-#include <QPainter>
 #include <QColor>
+#include <QPainter>
+#include <QPainterPath>
 #include <QTimer>
 
 #include <cmath>

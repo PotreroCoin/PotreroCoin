@@ -10,11 +10,11 @@ SetCompressor /SOLID lzma
 !define URL https://potrero.org/
 
 # MUI Symbol Definitions
-!define MUI_ICON "/data/git/potrero/PotreroCoin/share/pixmaps/bitcoin.ico"
-!define MUI_WELCOMEFINISHPAGE_BITMAP "/data/git/potrero/PotreroCoin/share/pixmaps/nsis-wizard.bmp"
+!define MUI_ICON "/home/cris/git/PotreroCoin/share/pixmaps/bitcoin.ico"
+!define MUI_WELCOMEFINISHPAGE_BITMAP "/home/cris/git/PotreroCoin/share/pixmaps/nsis-wizard.bmp"
 !define MUI_HEADERIMAGE
 !define MUI_HEADERIMAGE_RIGHT
-!define MUI_HEADERIMAGE_BITMAP "/data/git/potrero/PotreroCoin/share/pixmaps/nsis-header.bmp"
+!define MUI_HEADERIMAGE_BITMAP "/home/cris/git/PotreroCoin/share/pixmaps/nsis-header.bmp"
 !define MUI_FINISHPAGE_NOAUTOCLOSE
 !define MUI_STARTMENUPAGE_REGISTRY_ROOT HKLM
 !define MUI_STARTMENUPAGE_REGISTRY_KEY ${REGKEY}
@@ -22,7 +22,7 @@ SetCompressor /SOLID lzma
 !define MUI_STARTMENUPAGE_DEFAULTFOLDER "Potrero Core"
 !define MUI_FINISHPAGE_RUN $INSTDIR\potrero-qt
 !define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\modern-uninstall.ico"
-!define MUI_UNWELCOMEFINISHPAGE_BITMAP "/data/git/potrero/PotreroCoin/share/pixmaps/nsis-wizard.bmp"
+!define MUI_UNWELCOMEFINISHPAGE_BITMAP "/home/cris/git/PotreroCoin/share/pixmaps/nsis-wizard.bmp"
 !define MUI_UNFINISHPAGE_NOAUTOCLOSE
 
 # Included files
@@ -48,7 +48,7 @@ Var StartMenuGroup
 !insertmacro MUI_LANGUAGE English
 
 # Installer attributes
-OutFile /data/git/potrero/PotreroCoin/potrero-${VERSION}-win-setup.exe
+OutFile /home/cris/git/PotreroCoin/potrero-${VERSION}-win-setup.exe
 !if "" == "64"
 InstallDir $PROGRAMFILES64\Potrero
 !else
@@ -73,14 +73,14 @@ ShowUninstDetails show
 Section -Main SEC0000
     SetOutPath $INSTDIR
     SetOverwrite on
-    File /data/git/potrero/PotreroCoin/release/potrero-qt
-    File /oname=COPYING.txt /data/git/potrero/PotreroCoin/COPYING
-    File /oname=readme.txt /data/git/potrero/PotreroCoin/doc/README_windows.txt
+    File /home/cris/git/PotreroCoin/release/potrero-qt
+    File /oname=COPYING.txt /home/cris/git/PotreroCoin/COPYING
+    File /oname=readme.txt /home/cris/git/PotreroCoin/doc/README_windows.txt
     SetOutPath $INSTDIR\daemon
-    File /data/git/potrero/PotreroCoin/release/potrerod
-    File /data/git/potrero/PotreroCoin/release/potrero-cli
+    File /home/cris/git/PotreroCoin/release/potrerod
+    File /home/cris/git/PotreroCoin/release/potrero-cli
     SetOutPath $INSTDIR\doc
-    File /r /data/git/potrero/PotreroCoin/doc\*.*
+    File /r /home/cris/git/PotreroCoin/doc\*.*
     SetOutPath $INSTDIR
     WriteRegStr HKCU "${REGKEY}\Components" Main 1
 SectionEnd
