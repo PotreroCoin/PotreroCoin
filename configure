@@ -19522,6 +19522,9 @@ then :
   withval=$with_protoc_bindir; protoc_bin_path=$withval
 fi
 
+if test -z "$protoc_bin_path" && test -x /usr/bin/protoc; then
+  protoc_bin_path=/usr/bin
+fi
 
 # Check whether --enable-man was given.
 if test ${enable_man+y}

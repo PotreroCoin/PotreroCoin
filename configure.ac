@@ -178,6 +178,9 @@ AC_ARG_ENABLE([zmq],
   [use_zmq=yes])
 
 AC_ARG_WITH([protoc-bindir],[AS_HELP_STRING([--with-protoc-bindir=BIN_DIR],[specify protoc bin path])], [protoc_bin_path=$withval], [])
+if test -z "$protoc_bin_path" && test -x /usr/bin/protoc; then
+  protoc_bin_path=/usr/bin
+fi
 
 AC_ARG_ENABLE(man,
     [AS_HELP_STRING([--disable-man],
